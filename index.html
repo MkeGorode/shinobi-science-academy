@@ -974,6 +974,58 @@
   body.phone-remote-mode .remote-pad-hint {
     display: block;
   }
+
+  /* ==========================================================================
+     ANDROID TV / FIRE TV 2X DENSITY VIEWPORT (960x540 & SILK 960x460) FIT
+     ========================================================================== */
+  @media (max-height: 680px) {
+    .top-bar { padding: 4px 12px !important; border-bottom-width: 3px !important; }
+    .home-pill, .score-pill, .icon-btn { padding: 4px 10px !important; font-size: 0.95rem !important; box-shadow: 2px 2px 0 #000 !important; }
+    .stage-wrap { padding: 6px 12px !important; gap: 6px !important; }
+    .manga-card { padding: 8px 12px !important; gap: 6px !important; border-width: 3px !important; box-shadow: 5px 5px 0 var(--orange) !important; min-height: 0 !important; }
+    .stats-strip { gap: 6px !important; flex-shrink: 0; }
+    .mini-stat { padding: 4px 8px !important; border-width: 2.5px !important; box-shadow: 2px 2px 0 #000 !important; }
+    .mini-stat-lbl { font-size: 0.68rem !important; }
+    .mini-stat-val { font-size: 1.15rem !important; }
+    .hero-banner-box { min-height: 95px !important; max-height: 36vh !important; flex: 1 1 95px !important; border-width: 3px !important; box-shadow: 4px 4px 0 #000 !important; }
+    .hero-banner-overlay { padding: 8px 14px !important; }
+    .hero-banner-overlay h1 { font-size: 1.7rem !important; }
+    .btn-giant-start { padding: 8px 14px !important; font-size: 1.35rem !important; border-width: 3px !important; box-shadow: 4px 4px 0 #000 !important; flex-shrink: 0; }
+    .subject-pills-row { gap: 6px !important; flex-shrink: 0; }
+    .subj-btn { padding: 6px 10px !important; font-size: 1.05rem !important; border-width: 2.5px !important; box-shadow: 3px 3px 0 #000 !important; }
+    .progress-dots-bar { padding-bottom: 4px !important; border-bottom-width: 2.5px !important; flex-shrink: 0; }
+    .p-dot { width: 26px !important; height: 26px !important; font-size: 0.95rem !important; }
+    .question-manga-panel, .question-manga-panel.compact-with-svg {
+      grid-template-columns: 110px minmax(0, 1fr) !important;
+      min-height: 74px !important;
+      max-height: 24vh !important;
+      border-width: 3px !important;
+      box-shadow: 3px 3px 0 #000 !important;
+      flex-shrink: 0;
+    }
+    .q-bubble-side { padding: 6px 10px !important; }
+    .q-meta-tag { font-size: 0.85rem !important; margin-bottom: 2px !important; }
+    .q-main-text, .compact-with-svg .q-main-text { font-size: 0.95rem !important; line-height: 1.2 !important; }
+    .svg-container { padding: 4px 8px !important; border-width: 2.5px !important; box-shadow: 3px 3px 0 #000 !important; gap: 3px !important; flex: 1 1 110px !important; min-height: 0 !important; }
+    .svg-header-bar { padding-bottom: 3px !important; }
+    .svg-container svg { max-height: 26vh !important; }
+    .svg-container.gallery-mode svg { max-height: 52vh !important; }
+    .combo-header-strip { padding: 4px 10px !important; font-size: 0.9rem !important; }
+    .answers-list { gap: 6px !important; }
+    .ans-card { min-height: 46px !important; padding: 6px 10px !important; gap: 8px !important; border-width: 2.5px !important; box-shadow: 3px 3px 0 #000 !important; }
+    .ans-badge { min-width: 32px !important; height: 32px !important; font-size: 1.1rem !important; }
+    .ans-text { font-size: 0.86rem !important; line-height: 1.18 !important; }
+    .sensei-top-row { grid-template-columns: 95px minmax(0, 1fr) !important; border-bottom-width: 2.5px !important; }
+    .sensei-art-cell { min-height: 75px !important; max-height: 22vh !important; }
+    .sensei-lessons-cell { padding: 5px 8px !important; gap: 4px !important; }
+    .trap-note, .why-note { padding: 4px 8px !important; font-size: 0.78rem !important; line-height: 1.18 !important; }
+    .voice-box { padding: 6px 10px !important; }
+    .voice-target-sentence { font-size: 0.9rem !important; line-height: 1.2 !important; margin: 2px 0 4px !important; }
+    .kw-chip { padding: 2px 6px !important; font-size: 0.74rem !important; }
+    .mic-btn-row { margin-top: 4px !important; gap: 6px !important; }
+    .btn-mic, .btn-next-after-mic { padding: 6px 10px !important; font-size: 1rem !important; margin-top: 4px !important; }
+    #syncRoleBanner { display: none !important; }
+  }
 </style>
 </head>
 <body>
