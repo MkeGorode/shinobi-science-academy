@@ -784,9 +784,203 @@
     max-height: 90vh;
     overflow-y: auto;
   }
+
+  /* ==========================================================================
+     SHONEN JUMP MANGA ANIMATIONS & IMPACT FX
+     ========================================================================== */
+  @keyframes mangaBreath {
+    0%, 100% { transform: scale(1) translateY(0); filter: saturate(1.05) contrast(1.05); }
+    50% { transform: scale(1.055) translateY(-3px); filter: saturate(1.22) contrast(1.12); }
+  }
+
+  @keyframes sfxBounce {
+    0%, 100% { transform: rotate(-8deg) scale(1); text-shadow: 3px 3px 0 #000; }
+    50% { transform: rotate(-4deg) scale(1.14); text-shadow: 5px 5px 0 var(--red), 0 0 14px var(--yellow); }
+  }
+
+  @keyframes panelSlamIn {
+    0% { opacity: 0; transform: translateY(14px) scale(0.97); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes chakraPulseBtn {
+    0%, 100% { box-shadow: 7px 7px 0 #000, 0 0 0 rgba(249, 115, 22, 0); }
+    50% { box-shadow: 7px 7px 0 #000, 0 0 24px rgba(250, 204, 21, 0.75); }
+  }
+
+  @keyframes kwPopAnim {
+    0% { transform: scale(0.7); }
+    60% { transform: scale(1.18); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes screenShakeAnim {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-10px, 6px); }
+    40% { transform: translate(10px, -6px); }
+    60% { transform: translate(-8px, -4px); }
+    80% { transform: translate(8px, 4px); }
+  }
+
+  @keyframes impactBurstAnim {
+    0% { opacity: 0; transform: scale(0.4) rotate(-8deg); }
+    35% { opacity: 1; transform: scale(1.12) rotate(2deg); }
+    80% { opacity: 1; transform: scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: scale(1.25) rotate(0deg); }
+  }
+
+  .hero-banner-box img,
+  .q-art-thumb img,
+  .sensei-art-cell img {
+    animation: mangaBreath 6s ease-in-out infinite;
+  }
+
+  .sfx-float {
+    animation: sfxBounce 1.8s ease-in-out infinite;
+  }
+
+  .manga-card,
+  .question-manga-panel,
+  .ans-card,
+  .sensei-explain-panel {
+    animation: panelSlamIn 0.24s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+  }
+
+  .btn-giant-start,
+  .btn-mic.listening,
+  .btn-next-after-mic.unlocked {
+    animation: chakraPulseBtn 2s ease-in-out infinite;
+  }
+
+  .kw-chip.spoken {
+    animation: kwPopAnim 0.32s ease-out;
+  }
+
+  body.shake-fx {
+    animation: screenShakeAnim 0.38s ease-in-out;
+  }
+
+  .impact-fx-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 950;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(250,204,21,0.28) 0%, rgba(0,0,0,0) 70%);
+  }
+
+  .impact-fx-overlay.active {
+    display: flex;
+  }
+
+  .impact-fx-badge {
+    font-family: 'Bangers', Impact, sans-serif;
+    font-size: clamp(3rem, 8vw, 7.5rem);
+    color: var(--yellow);
+    background: #000;
+    border: 6px solid #fff;
+    box-shadow: 12px 12px 0 var(--orange), 0 0 40px var(--cyan);
+    padding: 14px 38px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: impactBurstAnim 0.68s ease-out forwards;
+  }
+
+  /* ==========================================================================
+     DEFAULT PHONE = TV REMOTE + MIC MODE (WITH 1-CLICK SWITCH TO FULL PHONE)
+     ========================================================================== */
+  .phone-mode-bar {
+    display: none;
+    background: linear-gradient(90deg, #064e3b 0%, #0f172a 100%);
+    color: #fff;
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    padding: 8px 10px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .phone-mode-bar.visible {
+    display: flex;
+  }
+
+  .btn-switch-phone-mode {
+    background: var(--yellow);
+    color: #000;
+    border: 3px solid #000;
+    box-shadow: 3px 3px 0 #000;
+    padding: 6px 12px;
+    font-family: 'Bangers', Impact, sans-serif;
+    font-size: clamp(0.95rem, 3.5vw, 1.25rem);
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  /* In Phone Remote Mode, streamline the screen into a pure tactile Gamepad + Mic for the TV */
+  body.phone-remote-mode .stats-strip,
+  body.phone-remote-mode .hero-banner-box {
+    display: none !important;
+  }
+
+  body.phone-remote-mode #battleSvgBox {
+    display: none !important;
+  }
+
+  body.phone-remote-mode .q-art-thumb {
+    display: none !important;
+  }
+
+  body.phone-remote-mode .question-manga-panel,
+  body.phone-remote-mode .question-manga-panel.compact-with-svg {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+  }
+
+  body.phone-remote-mode .sensei-top-row {
+    display: none !important;
+  }
+
+  body.phone-remote-mode .ans-card {
+    min-height: 76px !important;
+    padding: 12px 14px !important;
+    background: #fefce8;
+  }
+
+  body.phone-remote-mode .ans-badge {
+    min-width: 48px !important;
+    height: 48px !important;
+    font-size: 1.5rem !important;
+    background: var(--orange);
+    color: #fff;
+  }
+
+  .remote-pad-hint {
+    display: none;
+    background: #000;
+    color: var(--cyan);
+    border: 3px solid #000;
+    padding: 8px 12px;
+    font-family: 'Bangers', Impact, sans-serif;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  body.phone-remote-mode .remote-pad-hint {
+    display: block;
+  }
 </style>
 </head>
 <body>
+
+<div class="impact-fx-overlay" id="impactFxOverlay">
+  <div class="impact-fx-badge" id="impactFxBadge">🌀 RASENGAN!!</div>
+</div>
 
 <!-- FAMILY GATE (8464) -->
 <div class="gate-overlay" id="familyGate">
@@ -824,12 +1018,22 @@
     ⚠️ Tampering blocked by ANBU Checksum!
   </div>
   <div id="syncRoleBanner" style="display:none; background:#064e3b; color:#4ade80; border:3px solid #000; padding:6px 12px; text-align:center; font-weight:900; font-size:clamp(0.85rem, 1.1vw, 1.3rem);"></div>
+  <div class="phone-mode-bar" id="phoneModeBar">
+    <span id="phoneModeStatusTxt" style="font-weight:900; font-size:0.88rem; color:#4ade80;">🎮 РЕЖИМ ПУЛЬТА + МІКРОФОНА ДЛЯ ТВ (#8464)</span>
+    <button class="btn-switch-phone-mode tv-focusable" id="btnSwitchPhoneMode" onclick="togglePhoneFullMode()">
+      📱 Перейти повністю в телефон
+    </button>
+  </div>
 
   <!-- ========================================================================
        SCREEN 1: FULL-SCREEN HOME DASHBOARD
        ======================================================================== -->
   <section id="screenDashboard" style="flex:1; display:flex; flex-direction:column;">
     <div class="manga-card">
+      <div class="remote-pad-hint">
+        🎮 ТЕЛЕФОН ПРАЦЮЄ ЯК ПУЛЬТ І МІКРОФОН ДЛЯ ТВ!<br>
+        <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.85rem; color:#fff; font-weight:700;">Обирай раунд нижче і дивись на великий екран ТВ (або натисни жовту кнопку зверху, щоб грати повністю в телефоні).</span>
+      </div>
       <!-- 4 HONEST PARENT STATS -->
       <div class="stats-strip">
         <div class="mini-stat">
@@ -1451,8 +1655,9 @@ function unlockFamilyGate() {
 // REAL-TIME PHONE (GAMEPAD + MIC) <-> TV (BIG SCREEN) SYNC BRIDGE
 // ============================================================================
 const sync = {
-  role: "HOST", // "HOST" (TV/Monitor) or "CONTROLLER" (Stas's Phone)
-  room: "",
+  role: "HOST", // "HOST" (TV/Monitor), "CONTROLLER" (Stas's Phone Remote), or "STANDALONE" (Full Phone)
+  room: "8464",
+  phoneMode: "REMOTE", // "REMOTE" (default on Phone) or "FULL" (Full game on Phone)
   peerConnected: false,
   mqttClients: [],
   peer: null,
@@ -1463,20 +1668,97 @@ const sync = {
   helloInterval: null
 };
 
+function isPhoneDevice() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("tv") === "1") return false;
+  if (params.get("ctl")) return true;
+  const ua = navigator.userAgent || "";
+  if (/AFT|FireTV|Silk-Accelerated|SmartTV|Web0S|Tizen|BRAVIA/i.test(ua)) return false;
+  return window.innerWidth <= 820 || /iPhone|iPad|iPod|Android.*Mobile|Mobile/i.test(ua);
+}
+
+function triggerImpactFx(kind) {
+  const ov = document.getElementById("impactFxOverlay");
+  const bdg = document.getElementById("impactFxBadge");
+  if (!ov || !bdg) return;
+  if (kind === "WIN") {
+    bdg.textContent = "🌀 RASENGAN HIT!!";
+    bdg.style.color = "var(--yellow)";
+    bdg.style.boxShadow = "12px 12px 0 var(--orange), 0 0 45px var(--cyan)";
+  } else {
+    bdg.textContent = "👁️ GENJUTSU TRAP!!";
+    bdg.style.color = "#fff";
+    bdg.style.boxShadow = "12px 12px 0 var(--red), 0 0 45px var(--red)";
+    document.body.classList.remove("shake-fx");
+    void document.body.offsetWidth;
+    document.body.classList.add("shake-fx");
+  }
+  ov.classList.remove("active");
+  void ov.offsetWidth;
+  ov.classList.add("active");
+  setTimeout(() => {
+    ov.classList.remove("active");
+    document.body.classList.remove("shake-fx");
+  }, 680);
+}
+
+function togglePhoneFullMode() {
+  playSealClick();
+  if (sync.phoneMode === "REMOTE") {
+    sync.phoneMode = "FULL";
+    sync.role = "STANDALONE";
+    document.body.classList.remove("phone-remote-mode");
+  } else {
+    sync.phoneMode = "REMOTE";
+    sync.role = "CONTROLLER";
+    document.body.classList.add("phone-remote-mode");
+    initSyncBridge("CONTROLLER", sync.room || "8464");
+  }
+  updateTvBtnUI();
+  if (ui.screen === "battle") renderBattleCard();
+}
+
 function updateTvBtnUI() {
   const btn = document.getElementById("tvModeBtn");
   const banner = document.getElementById("syncRoleBanner");
   const pairBadge = document.getElementById("pairStatusBadge");
+  const phoneBar = document.getElementById("phoneModeBar");
+  const phoneStatus = document.getElementById("phoneModeStatusTxt");
+  const phoneSwitchBtn = document.getElementById("btnSwitchPhoneMode");
   if (!btn) return;
 
-  if (sync.peerConnected) {
+  const onPhone = isPhoneDevice() || sync.role === "CONTROLLER" || sync.role === "STANDALONE";
+  if (phoneBar) {
+    if (onPhone) {
+      phoneBar.classList.add("visible");
+      if (sync.phoneMode === "REMOTE") {
+        document.body.classList.add("phone-remote-mode");
+        if (phoneStatus) {
+          phoneStatus.textContent = sync.peerConnected
+            ? `🟢 🎮 ПУЛЬТ + МІКРОФОН ПІДКЛЮЧЕНО ДО ТВ (#${sync.room})`
+            : `🎮 РЕЖИМ ПУЛЬТА + МІКРОФОНА ДЛЯ ТВ (#${sync.room})`;
+          phoneStatus.style.color = sync.peerConnected ? "#4ade80" : "#facc15";
+        }
+        if (phoneSwitchBtn) phoneSwitchBtn.textContent = "📱 Перейти повністю в телефон";
+      } else {
+        document.body.classList.remove("phone-remote-mode");
+        if (phoneStatus) {
+          phoneStatus.textContent = "📱 ПОВНА ГРА НА ТЕЛЕФОНІ (Автономний режим)";
+          phoneStatus.style.color = "#38bdf8";
+        }
+        if (phoneSwitchBtn) phoneSwitchBtn.textContent = "🎮 Працювати як пульт для ТВ";
+      }
+    } else {
+      phoneBar.classList.remove("visible");
+      document.body.classList.remove("phone-remote-mode");
+    }
+  }
+
+  if (sync.peerConnected && sync.role !== "STANDALONE") {
     btn.classList.add("tv-active");
     if (sync.role === "CONTROLLER") {
       btn.textContent = `🟢 🎮 TV #${sync.room}`;
-      if (banner) {
-        banner.style.display = "block";
-        banner.textContent = `🎮 PHONE CONTROLLER LINKED TO TV #${sync.room} - Tap answers & speak into Phone Mic!`;
-      }
+      if (banner) banner.style.display = "none";
     } else {
       btn.textContent = `🟢 📱 LINKED #${sync.room}`;
       if (banner) {
@@ -1492,14 +1774,7 @@ function updateTvBtnUI() {
   } else {
     btn.classList.remove("tv-active");
     btn.textContent = sync.role === "CONTROLLER" ? `🟡 🎮 #${sync.room}` : `📺 TV + 📱`;
-    if (banner) {
-      if (sync.role === "CONTROLLER") {
-        banner.style.display = "block";
-        banner.textContent = `🟡 Connecting Phone Controller to TV Room #${sync.room}...`;
-      } else {
-        banner.style.display = "none";
-      }
-    }
+    if (banner) banner.style.display = "none";
   }
 }
 
@@ -1508,14 +1783,16 @@ function initSyncBridge(forceRole, forceRoom) {
   const ctlParam = forceRoom || (params.get("ctl") || "").trim();
   const roomParam = (params.get("room") || "").trim();
 
-  if (forceRole === "CONTROLLER" || (ctlParam && forceRole !== "HOST")) {
+  if (forceRole === "CONTROLLER" || (ctlParam && forceRole !== "HOST") || (isPhoneDevice() && forceRole !== "HOST" && sync.phoneMode === "REMOTE")) {
     sync.role = "CONTROLLER";
-    sync.room = ctlParam;
+    sync.phoneMode = "REMOTE";
+    sync.room = ctlParam || roomParam || "8464";
+    document.body.classList.add("phone-remote-mode");
   } else {
     sync.role = "HOST";
-    let saved = roomParam || sessionStorage.getItem("SHINOBI_TV_ROOM_CODE");
-    if (!saved || !/^\d{4}$/.test(saved)) {
-      saved = String(Math.floor(1000 + Math.random() * 9000));
+    let saved = roomParam || sessionStorage.getItem("SHINOBI_TV_ROOM_CODE") || "8464";
+    if (!/^\d{4}$/.test(saved)) {
+      saved = "8464";
     }
     sessionStorage.setItem("SHINOBI_TV_ROOM_CODE", saved);
     sync.room = forceRoom || saved;
@@ -2024,6 +2301,9 @@ function renderBattleCard() {
     if (hasSvg) {
       const diag = BYAKUGAN_DIAGRAMS[m.svgKey];
       svgHtml = `
+        <button class="remote-pad-hint tv-focusable" style="width:100%; cursor:pointer; background:#0f172a; color:var(--yellow);" onclick="toggleBattleXray()">
+          👁️ ${ui.xrayRevealed ? 'Сховати X-Ray підказки на ТВ' : 'Показати X-Ray підказки на ТВ'}
+        </button>
         <div class="svg-container ${ui.xrayRevealed ? '' : 'byakugan-hidden'}" id="battleSvgBox">
           <div class="svg-header-bar">
             <span class="comic-font" style="color:var(--cyan); font-size:clamp(1rem, 1.3vw, 1.6rem);">${diag.title}</span>
@@ -2273,6 +2553,7 @@ function clickComboCard(idx) {
 function recordWin() {
   const m = ui.missionList[ui.currentIndex];
   playRasenganWin();
+  triggerImpactFx("WIN");
   if (!ui.cardAttemptFailed) {
     state.cleanWins = (state.cleanWins || 0) + 1;
     state.masteredIds[m.id] = true;
@@ -2287,6 +2568,7 @@ function recordWin() {
 function triggerMistakeCard() {
   const m = ui.missionList[ui.currentIndex];
   playGenjutsuTrap();
+  triggerImpactFx("TRAP");
   if (!ui.cardAttemptFailed) {
     ui.cardAttemptFailed = true;
     state.trapsHit = (state.trapsHit || 0) + 1;
