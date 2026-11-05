@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#ff5e00">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>SHINOBI SCIENCE | Stas GCSE 8464</title>
+<title>SHINOBI SCIENCE | Stas GCSE 8464 (TV & Mobile)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Chakra+Petch:wght@600;700;800&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
@@ -23,55 +23,60 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: #140a04 radial-gradient(circle at 50% 0%, rgba(255, 94, 0, 0.35), transparent 65%);
+    background: #140a04 radial-gradient(circle at 50% 0%, rgba(255, 94, 0, 0.35), transparent 70%);
     color: var(--ink);
     font-family: 'Chakra Petch', system-ui, sans-serif;
     min-height: 100dvh;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .comic-font {
     font-family: 'Bangers', Impact, sans-serif;
-    letter-spacing: 1.2px;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
   }
 
+  /* High-visibility Smart TV Remote D-Pad Focus Ring */
   .tv-focusable:focus {
-    outline: none !important;
-    box-shadow: 0 0 0 4px var(--cyan), 5px 5px 0 #000 !important;
+    outline: 5px solid var(--cyan) !important;
+    outline-offset: 2px;
+    box-shadow: 0 0 28px rgba(0, 229, 255, 0.95), 8px 8px 0 #000 !important;
+    transform: translate(-3px, -3px) scale(1.015);
+    z-index: 50;
   }
 
   /* ==========================================================================
-     ULTRA-MINIMAL TOP BAR (ONLY 3 ELEMENTS: HOME, SCORE, TOOLS)
+     FULL-WIDTH EDGE-TO-EDGE TOP BAR (SCALES FOR 1080P & 4K TV)
      ========================================================================== */
   .top-bar {
     background: #0d0f17;
     border-bottom: 4px solid #000;
     box-shadow: 0 4px 0 var(--orange);
-    padding: 8px 16px;
+    padding: clamp(8px, 1vh, 16px) clamp(12px, 1.5vw, 32px);
     position: sticky;
     top: 0;
     z-index: 100;
   }
 
   .top-inner {
-    width: 94vw;
-    max-width: 1540px;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 14px;
+    gap: 12px;
   }
 
   .home-pill {
     background: var(--yellow);
     color: #000;
-    border: 3px solid #000;
-    box-shadow: 3px 3px 0 var(--orange);
-    padding: 7px 18px;
+    border: 3.5px solid #000;
+    box-shadow: 4px 4px 0 var(--orange);
+    padding: clamp(6px, 0.8vh, 12px) clamp(14px, 1.4vw, 26px);
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: 1.4rem;
+    font-size: clamp(1.25rem, 1.6vw, 2.2rem);
     letter-spacing: 1px;
     cursor: pointer;
     display: flex;
@@ -82,10 +87,10 @@
   .score-pill {
     background: #1e293b;
     color: #fff;
-    border: 3px solid #000;
-    padding: 7px 20px;
+    border: 3.5px solid #000;
+    padding: clamp(6px, 0.8vh, 12px) clamp(14px, 1.5vw, 28px);
     font-weight: 800;
-    font-size: 1.15rem;
+    font-size: clamp(1rem, 1.35vw, 1.85rem);
     display: flex;
     align-items: center;
     gap: 14px;
@@ -94,65 +99,70 @@
   .icon-btn {
     background: var(--paper);
     color: #000;
-    border: 3px solid #000;
+    border: 3.5px solid #000;
     box-shadow: 3px 3px 0 #000;
-    padding: 7px 16px;
+    padding: clamp(6px, 0.8vh, 12px) clamp(12px, 1.2vw, 22px);
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: 1.25rem;
+    font-size: clamp(1.1rem, 1.4vw, 1.9rem);
     cursor: pointer;
   }
 
+  .icon-btn.tv-active {
+    background: var(--cyan);
+    box-shadow: 3px 3px 0 var(--yellow);
+  }
+
   /* ==========================================================================
-     FULL-SCREEN WORKSPACE CONTAINER (94VW UP TO 1540PX + FULL HEIGHT)
+     FULL-SCREEN WORKSPACE (98VW EDGE-TO-EDGE ON TV, MONITOR & MOBILE)
      ========================================================================== */
   .stage-wrap {
-    width: 94vw;
-    max-width: 1540px;
-    margin: 16px auto 24px;
+    width: 98vw;
+    max-width: 100%;
+    flex: 1;
+    margin: 1vh auto 1.5vh;
     padding: 0;
+    display: flex;
+    flex-direction: column;
   }
 
   .manga-card {
     background: var(--paper);
-    background-image: radial-gradient(rgba(0,0,0,0.07) 1px, transparent 1px);
-    background-size: 12px 12px;
+    background-image: radial-gradient(rgba(0,0,0,0.07) 1.5px, transparent 1.5px);
+    background-size: 14px 14px;
     border: 5px solid #000;
-    box-shadow: 12px 12px 0 var(--orange), 0 24px 60px rgba(0,0,0,0.85);
-    padding: 26px 32px;
-    min-height: calc(100dvh - 96px);
+    box-shadow: 10px 10px 0 var(--orange), 0 20px 55px rgba(0,0,0,0.85);
+    padding: clamp(16px, 2.2vh, 38px) clamp(16px, 2.4vw, 48px);
+    flex: 1;
+    min-height: calc(100dvh - 88px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
-  @media (max-width: 680px) {
-    .manga-card { padding: 16px; min-height: auto; }
-  }
-
   /* ==========================================================================
-     SCREEN 1: HOME (COMPACT 4-STAT STRIP + 1 GIANT START BUTTON)
+     SCREEN 1: HOME (FULL-SCREEN TV & MONITOR SCALE)
      ========================================================================== */
   .stats-strip {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 18px;
+    gap: clamp(8px, 1.2vw, 22px);
+    margin-bottom: clamp(12px, 1.8vh, 24px);
   }
 
   @media (max-width: 680px) {
-    .stats-strip { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
   }
 
   .mini-stat {
     background: #fff;
-    border: 3.5px solid #000;
-    box-shadow: 4px 4px 0 #000;
-    padding: 12px 16px;
+    border: 4px solid #000;
+    box-shadow: 5px 5px 0 #000;
+    padding: clamp(10px, 1.4vh, 22px) clamp(10px, 1.2vw, 24px);
     text-align: center;
   }
 
   .mini-stat-lbl {
-    font-size: 0.88rem;
+    font-size: clamp(0.8rem, 1.05vw, 1.4rem);
     font-weight: 800;
     color: #475569;
     text-transform: uppercase;
@@ -160,19 +170,19 @@
 
   .mini-stat-val {
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: clamp(1.9rem, 2.6vw, 2.6rem);
+    font-size: clamp(1.8rem, 2.8vw, 3.8rem);
     color: #000;
-    line-height: 1.1;
+    line-height: 1.05;
   }
 
   .hero-banner-box {
     position: relative;
     flex: 1;
-    min-height: clamp(240px, 38vh, 420px);
-    border: 4px solid #000;
-    box-shadow: 6px 6px 0 #000;
+    min-height: clamp(220px, 42vh, 560px);
+    border: 5px solid #000;
+    box-shadow: 7px 7px 0 #000;
     overflow: hidden;
-    margin-bottom: 18px;
+    margin-bottom: clamp(12px, 1.8vh, 24px);
     background: #000;
   }
 
@@ -190,18 +200,18 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 22px 26px;
+    padding: clamp(16px, 2.5vh, 36px) clamp(18px, 2.5vw, 42px);
     color: #fff;
   }
 
   .sfx-float {
     position: absolute;
     top: 14px;
-    right: 18px;
+    right: 20px;
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: 2.6rem;
+    font-size: clamp(2rem, 3vw, 4.2rem);
     color: var(--yellow);
-    text-shadow: 3px 3px 0 #000, -2px -2px 0 var(--red);
+    text-shadow: 4px 4px 0 #000, -2px -2px 0 var(--red);
     transform: rotate(7deg);
   }
 
@@ -210,39 +220,39 @@
     background: linear-gradient(135deg, #ff5e00 0%, #e60012 100%);
     color: #fff;
     border: 4px solid #000;
-    box-shadow: 6px 6px 0 #000;
-    padding: 20px 26px;
+    box-shadow: 7px 7px 0 #000;
+    padding: clamp(16px, 2.2vh, 30px) 24px;
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: clamp(1.85rem, 2.5vw, 2.4rem);
+    font-size: clamp(1.8rem, 2.6vw, 3.4rem);
     letter-spacing: 2px;
     cursor: pointer;
-    text-shadow: 2px 2px 0 #000;
+    text-shadow: 3px 3px 0 #000;
     transition: transform 0.12s;
-    margin-bottom: 16px;
+    margin-bottom: clamp(12px, 1.6vh, 22px);
   }
 
   .btn-giant-start:hover {
     transform: translate(-2px, -2px);
-    box-shadow: 8px 8px 0 var(--yellow);
+    box-shadow: 9px 9px 0 var(--yellow);
   }
 
   .subject-pills-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
+    gap: clamp(8px, 1.2vw, 20px);
   }
 
   @media (max-width: 680px) {
-    .subject-pills-row { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .subject-pills-row { grid-template-columns: repeat(2, 1fr); }
   }
 
   .subj-btn {
     background: #fff;
     border: 3.5px solid #000;
-    box-shadow: 4px 4px 0 #000;
-    padding: 14px 12px;
+    box-shadow: 5px 5px 0 #000;
+    padding: clamp(10px, 1.4vh, 20px) 12px;
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: 1.35rem;
+    font-size: clamp(1.15rem, 1.6vw, 2.2rem);
     letter-spacing: 1px;
     cursor: pointer;
     text-align: center;
@@ -251,29 +261,29 @@
   .subj-btn:hover { background: var(--yellow); }
 
   /* ==========================================================================
-     SCREEN 2: BATTLE CARD (WIDE, LARGE & EASY TO READ ON MONITOR / TV!)
+     SCREEN 2: FULL-SCREEN TV & MONITOR BATTLE CARD
      ========================================================================== */
   .progress-dots-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 3.5px solid #000;
+    margin-bottom: clamp(12px, 1.6vh, 22px);
+    padding-bottom: clamp(8px, 1.2vh, 16px);
+    border-bottom: 4px solid #000;
   }
 
   .dots-group {
     display: flex;
-    gap: 8px;
+    gap: clamp(6px, 0.8vw, 14px);
   }
 
   .p-dot {
-    width: 40px;
-    height: 34px;
+    width: clamp(36px, 3.2vw, 58px);
+    height: clamp(32px, 2.8vw, 50px);
     border: 3px solid #000;
     background: #fff;
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: 1.2rem;
+    font-size: clamp(1.1rem, 1.5vw, 2rem);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -286,13 +296,13 @@
   /* Wide Manga Strip inside Question */
   .question-manga-panel {
     display: grid;
-    grid-template-columns: 310px 1fr;
+    grid-template-columns: clamp(240px, 24vw, 440px) 1fr;
     border: 4px solid #000;
-    box-shadow: 6px 6px 0 #000;
+    box-shadow: 7px 7px 0 #000;
     background: #fff;
-    margin-bottom: 18px;
+    margin-bottom: clamp(14px, 2vh, 26px);
     overflow: hidden;
-    min-height: 210px;
+    min-height: clamp(180px, 24vh, 340px);
   }
 
   @media (max-width: 760px) {
@@ -302,7 +312,7 @@
   .q-art-thumb {
     position: relative;
     background: #000;
-    min-height: 210px;
+    min-height: clamp(180px, 24vh, 340px);
     border-right: 4px solid #000;
   }
 
@@ -318,7 +328,7 @@
   }
 
   .q-bubble-side {
-    padding: 22px 28px;
+    padding: clamp(16px, 2.2vh, 34px) clamp(18px, 2.4vw, 40px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -327,39 +337,41 @@
 
   .q-meta-tag {
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: 1.25rem;
+    font-size: clamp(1.15rem, 1.5vw, 2rem);
     color: var(--red);
     letter-spacing: 1px;
     margin-bottom: 8px;
   }
 
   .q-main-text {
-    font-size: clamp(1.4rem, 2vw, 1.95rem);
+    font-size: clamp(1.35rem, 2.1vw, 2.7rem);
     font-weight: 800;
     color: #000;
-    line-height: 1.35;
+    line-height: 1.32;
   }
 
-  /* Big 1-Click Answer Cards (2-Column Grid on Widescreen!) */
+  /* Big 1-Click Answer Cards (Fills bottom half of TV screen!) */
   .answers-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: clamp(12px, 1.5vw, 26px);
+    flex: 1;
+    align-content: stretch;
   }
 
   @media (max-width: 820px) {
-    .answers-list { grid-template-columns: 1fr; gap: 12px; }
+    .answers-list { grid-template-columns: 1fr; }
   }
 
   .ans-card {
     background: #fff;
     border: 4px solid #000;
-    box-shadow: 6px 6px 0 #000;
-    padding: 20px 22px;
-    min-height: 96px;
+    box-shadow: 7px 7px 0 #000;
+    padding: clamp(16px, 2.2vh, 32px) clamp(18px, 2vw, 34px);
+    min-height: clamp(88px, 14vh, 180px);
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: clamp(14px, 1.5vw, 26px);
     cursor: pointer;
     text-align: left;
     transition: transform 0.1s, background 0.1s;
@@ -368,16 +380,16 @@
   .ans-card:hover {
     background: var(--yellow);
     transform: translate(-3px, -3px);
-    box-shadow: 9px 9px 0 var(--orange);
+    box-shadow: 10px 10px 0 var(--orange);
   }
 
   .ans-badge {
-    min-width: 56px;
-    height: 56px;
+    min-width: clamp(50px, 4.5vw, 84px);
+    height: clamp(50px, 4.5vw, 84px);
     background: #000;
     color: var(--yellow);
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: 1.65rem;
+    font-size: clamp(1.5rem, 2.2vw, 3rem);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -385,14 +397,14 @@
   }
 
   .ans-text {
-    font-size: clamp(1.12rem, 1.35vw, 1.38rem);
+    font-size: clamp(1.1rem, 1.55vw, 2.1rem);
     font-weight: 800;
     color: #000;
-    line-height: 1.35;
+    line-height: 1.32;
   }
 
   /* ==========================================================================
-     SINGLE-SCREEN SENSEI + MIC CARD (WIDE & READABLE)
+     SINGLE-SCREEN SENSEI + MIC CARD (TV & MOBILE)
      ========================================================================== */
   .sensei-explain-panel {
     background: #fff;
@@ -407,7 +419,7 @@
 
   .sensei-top-row {
     display: grid;
-    grid-template-columns: 310px 1fr;
+    grid-template-columns: clamp(240px, 24vw, 440px) 1fr;
     border-bottom: 4px solid #000;
     flex: 1;
   }
@@ -418,7 +430,7 @@
 
   .sensei-art-cell {
     background: #000;
-    min-height: 220px;
+    min-height: clamp(180px, 24vh, 340px);
     border-right: 4px solid #000;
     position: relative;
   }
@@ -430,7 +442,7 @@
   }
 
   .sensei-lessons-cell {
-    padding: 20px 26px;
+    padding: clamp(16px, 2vh, 32px) clamp(18px, 2.2vw, 38px);
     background: #fff;
     display: flex;
     flex-direction: column;
@@ -441,34 +453,34 @@
   .trap-note {
     background: #fee2e2;
     border-left: 6px solid var(--red);
-    padding: 12px 16px;
-    font-size: clamp(1.05rem, 1.25vw, 1.22rem);
+    padding: clamp(10px, 1.4vh, 20px) clamp(14px, 1.6vw, 24px);
+    font-size: clamp(1.02rem, 1.35vw, 1.8rem);
     font-weight: 700;
     color: #7f1d1d;
-    line-height: 1.4;
+    line-height: 1.38;
   }
 
   .why-note {
     background: #fef3c7;
     border-left: 6px solid var(--orange);
-    padding: 12px 16px;
-    font-size: clamp(1.05rem, 1.25vw, 1.22rem);
+    padding: clamp(10px, 1.4vh, 20px) clamp(14px, 1.6vw, 24px);
+    font-size: clamp(1.02rem, 1.35vw, 1.8rem);
     font-weight: 700;
     color: #78350f;
-    line-height: 1.4;
+    line-height: 1.38;
   }
 
   .voice-box {
-    padding: 20px 26px;
+    padding: clamp(16px, 2vh, 30px) clamp(18px, 2.2vw, 38px);
     background: #090d16;
     color: #fff;
   }
 
   .voice-target-sentence {
-    font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+    font-size: clamp(1.18rem, 1.65vw, 2.2rem);
     font-weight: 800;
     color: #fff;
-    line-height: 1.45;
+    line-height: 1.42;
     margin: 8px 0 12px;
   }
 
@@ -479,7 +491,7 @@
     border: 2px solid #000;
     padding: 4px 12px;
     margin: 3px;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 1.15vw, 1.5rem);
     font-weight: 900;
   }
 
@@ -492,17 +504,19 @@
     display: flex;
     gap: 12px;
     margin-top: 12px;
+    flex-wrap: wrap;
   }
 
   .btn-mic {
     flex: 1;
+    min-width: 220px;
     background: var(--red);
     color: #fff;
     border: 3.5px solid #000;
     box-shadow: 5px 5px 0 #000;
-    padding: 15px;
+    padding: clamp(12px, 1.6vh, 22px);
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: 1.55rem;
+    font-size: clamp(1.35rem, 1.7vw, 2.3rem);
     letter-spacing: 1.2px;
     cursor: pointer;
   }
@@ -512,9 +526,9 @@
   .btn-next-after-mic {
     width: 100%;
     margin-top: 12px;
-    padding: 15px;
+    padding: clamp(13px, 1.7vh, 24px);
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: 1.55rem;
+    font-size: clamp(1.4rem, 1.8vw, 2.4rem);
     letter-spacing: 1.2px;
     border: 3.5px solid #000;
     cursor: pointer;
@@ -528,9 +542,9 @@
     background: #fff;
     border: 3.5px solid #000;
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: 2.3rem;
+    font-size: clamp(2rem, 2.6vw, 3.2rem);
     padding: 8px 18px;
-    width: 240px;
+    width: clamp(220px, 22vw, 340px);
     text-align: center;
     margin: 10px auto;
     display: block;
@@ -541,7 +555,7 @@
     gap: 8px;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 520px;
+    max-width: 640px;
     margin: 10px auto;
   }
 
@@ -550,8 +564,8 @@
     color: var(--yellow);
     border: 2.5px solid #000;
     font-family: 'Bangers', Impact, sans-serif;
-    font-size: 1.55rem;
-    padding: 10px 20px;
+    font-size: clamp(1.4rem, 1.8vw, 2.3rem);
+    padding: 10px 22px;
     cursor: pointer;
   }
 
@@ -560,11 +574,11 @@
     background: #070b16;
     border: 4px solid #000;
     padding: 16px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     text-align: center;
     color: #fff;
   }
-  .svg-container svg { max-width: 100%; height: auto; max-height: 340px; }
+  .svg-container svg { width: 100%; max-width: 960px; height: auto; max-height: 36vh; }
   .byakugan-hidden .svg-quiz-label { opacity: 0; }
 
   /* GATE & MODALS */
@@ -583,8 +597,8 @@
     background: var(--paper);
     border: 5px solid #000;
     box-shadow: 10px 10px 0 var(--orange);
-    padding: 22px;
-    max-width: 520px;
+    padding: 24px;
+    max-width: 560px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
@@ -596,15 +610,15 @@
 <!-- FAMILY GATE (8464) -->
 <div class="gate-overlay" id="familyGate">
   <div class="modal-card" style="text-align:center;">
-    <h2 class="comic-font" style="font-size:2rem; margin-bottom:8px;">🌀 SHINOBI SCIENCE (8464)</h2>
+    <h2 class="comic-font" style="font-size:2.2rem; margin-bottom:8px;">🌀 SHINOBI SCIENCE (8464)</h2>
     <p style="font-weight:800; margin-bottom:12px;">Enter 4-digit passcode (8464):</p>
     <input type="password" id="gateCodeInput" class="calc-display" maxlength="4" placeholder="8464" onkeydown="if(event.key==='Enter') unlockFamilyGate();">
     <div id="gateError" style="color:var(--red); font-weight:900; margin-bottom:8px; display:none;">Hint: 8464</div>
-    <button class="btn-giant-start" style="font-size:1.5rem; padding:12px; margin:0;" onclick="unlockFamilyGate()">ENTER</button>
+    <button class="btn-giant-start tv-focusable" style="font-size:1.6rem; padding:14px; margin:0;" onclick="unlockFamilyGate()">ENTER</button>
   </div>
 </div>
 
-<!-- ULTRA-CLEAN TOP BAR (3 ITEMS ONLY) -->
+<!-- ULTRA-CLEAN FULL-WIDTH TOP BAR -->
 <header class="top-bar">
   <div class="top-inner">
     <button class="home-pill tv-focusable" onclick="showScreen('dashboard')">
@@ -617,7 +631,8 @@
       <span id="liveTimerBadge" style="color:var(--cyan);">⏱ 00:00</span>
     </div>
 
-    <div style="display:flex; gap:6px;">
+    <div style="display:flex; gap:8px;">
+      <button class="icon-btn tv-focusable" id="tvModeBtn" onclick="toggleQuickTvMode()" title="Toggle Smart TV Sofa Mode (Remote Friendly)">📺 TV</button>
       <button class="icon-btn tv-focusable" onclick="openQrModal()" title="Phone QR & Sync">📱 QR</button>
       <button class="icon-btn tv-focusable" onclick="openAdminModal()" title="Parent Menu (PIN 2026)">⚙️</button>
     </div>
@@ -630,11 +645,11 @@
   </div>
 
   <!-- ========================================================================
-       SCREEN 1: ULTRA-CLEAN HOME (1 GIANT BUTTON + 4 COMPACT NUMBERS)
+       SCREEN 1: FULL-SCREEN HOME
        ======================================================================== -->
-  <section id="screenDashboard">
+  <section id="screenDashboard" style="flex:1; display:flex; flex-direction:column;">
     <div class="manga-card">
-      <!-- 4 HONEST PARENT STATS IN 1 COMPACT ROW -->
+      <!-- 4 HONEST PARENT STATS -->
       <div class="stats-strip">
         <div class="mini-stat">
           <div class="mini-stat-lbl">⏱ Time Today</div>
@@ -659,13 +674,13 @@
         <img id="heroBannerImg" alt="Naruto Battle Arena">
         <div class="sfx-float">ドドド!!</div>
         <div class="hero-banner-overlay">
-          <div style="font-size:0.8rem; font-weight:900; color:var(--yellow);" id="hdrRankBadge">RANK: CHUNIN (79/210 &rarr; TARGET 112/210)</div>
-          <h1 class="comic-font" style="font-size:2.1rem; line-height:1.05; text-shadow:3px 3px 0 #000;">5-BOSS BATTLE SPRINT</h1>
+          <div style="font-size:clamp(0.9rem, 1.2vw, 1.5rem); font-weight:900; color:var(--yellow);" id="hdrRankBadge">RANK: CHUNIN (79/210 &rarr; TARGET 112/210)</div>
+          <h1 class="comic-font" style="font-size:clamp(2rem, 3.2vw, 4.2rem); line-height:1.05; text-shadow:4px 4px 0 #000;">5-BOSS BATTLE SPRINT</h1>
         </div>
       </div>
 
       <!-- 1 GIANT ACTION BUTTON -->
-      <button class="btn-giant-start tv-focusable" onclick="startFiveBossSprint()">
+      <button class="btn-giant-start tv-focusable" id="mainStartBtn" onclick="startFiveBossSprint()">
         🔥 PLAY 5-BOSS ROUND NOW! &rarr;
       </button>
 
@@ -680,20 +695,20 @@
   </section>
 
   <!-- ========================================================================
-       SCREEN 2: ULTRA-CLEAN 1-CLICK BATTLE CARD
+       SCREEN 2: FULL-SCREEN 1-CLICK BATTLE CARD
        ======================================================================== -->
-  <section id="screenBattle" style="display:none;">
+  <section id="screenBattle" style="display:none; flex:1; flex-direction:column;">
     <div class="manga-card" id="battleCardMount"></div>
   </section>
 
   <!-- ========================================================================
        SCREEN 3: 5 DIAGRAMS
        ======================================================================== -->
-  <section id="screenDiagrams" style="display:none;">
+  <section id="screenDiagrams" style="display:none; flex:1; flex-direction:column;">
     <div class="manga-card">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-        <h2 class="comic-font" style="font-size:1.6rem;">👁️ 5 BYAKUGAN X-RAY DIAGRAMS</h2>
-        <button class="home-pill" onclick="showScreen('dashboard')">&larr; Back</button>
+        <h2 class="comic-font" style="font-size:clamp(1.6rem, 2.2vw, 2.8rem);">👁️ 5 BYAKUGAN X-RAY DIAGRAMS</h2>
+        <button class="home-pill tv-focusable" onclick="showScreen('dashboard')">&larr; Back</button>
       </div>
       <div id="diagramsGalleryMount"></div>
     </div>
@@ -703,14 +718,14 @@
 <!-- QR MODAL -->
 <div class="modal-bg" id="qrModal">
   <div class="modal-card" style="text-align:center;">
-    <h2 class="comic-font" style="font-size:1.8rem; margin-bottom:8px;">📱 OPEN ON PHONE</h2>
-    <div id="modalQrBox" style="background:#fff; padding:12px; border:4px solid #000; width:210px; height:210px; margin:0 auto 12px;"></div>
+    <h2 class="comic-font" style="font-size:2rem; margin-bottom:8px;">📱 OPEN ON PHONE / TV</h2>
+    <div id="modalQrBox" style="background:#fff; padding:12px; border:4px solid #000; width:220px; height:220px; margin:0 auto 12px;"></div>
     <div style="display:flex; gap:6px; margin-bottom:12px;">
       <input type="text" id="syncTokenInput" style="flex:1; padding:8px; border:2.5px solid #000; font-family:monospace;" placeholder="Sync Code...">
-      <button class="icon-btn" onclick="copySyncToken()">Copy</button>
-      <button class="icon-btn" onclick="importSyncToken()">Load</button>
+      <button class="icon-btn tv-focusable" onclick="copySyncToken()">Copy</button>
+      <button class="icon-btn tv-focusable" onclick="importSyncToken()">Load</button>
     </div>
-    <button class="home-pill" style="width:100%; justify-content:center;" onclick="closeModals()">Close</button>
+    <button class="home-pill tv-focusable" style="width:100%; justify-content:center;" onclick="closeModals()">Close</button>
   </div>
 </div>
 
@@ -718,28 +733,28 @@
 <div class="modal-bg" id="adminModal">
   <div class="modal-card">
     <div id="adminPinView" style="text-align:center;">
-      <h2 class="comic-font" style="font-size:1.8rem; margin-bottom:8px;">🔒 PARENT MENU (PIN: 2026)</h2>
+      <h2 class="comic-font" style="font-size:2rem; margin-bottom:8px;">🔒 PARENT MENU (PIN: 2026)</h2>
       <input type="password" id="adminPinInput" class="calc-display" maxlength="6" placeholder="••••" onkeydown="if(event.key==='Enter') verifyAdminPin();">
       <div id="adminPinError" style="color:var(--red); font-weight:900; display:none; margin-bottom:8px;">Wrong PIN!</div>
       <div style="display:flex; gap:8px; justify-content:center;">
-        <button class="home-pill" onclick="verifyAdminPin()">Unlock</button>
-        <button class="icon-btn" onclick="closeModals()">Cancel</button>
+        <button class="home-pill tv-focusable" onclick="verifyAdminPin()">Unlock</button>
+        <button class="icon-btn tv-focusable" onclick="closeModals()">Cancel</button>
       </div>
     </div>
 
     <div id="adminStudioView" style="display:none;">
-      <h3 class="comic-font" style="font-size:1.5rem; margin-bottom:10px;">📊 PARENT CONTROLS & CLOUD</h3>
-      <div id="studioScrollsList" style="font-size:0.9rem; font-weight:800; margin-bottom:12px;"></div>
+      <h3 class="comic-font" style="font-size:1.6rem; margin-bottom:10px;">📊 PARENT CONTROLS & CLOUD</h3>
+      <div id="studioScrollsList" style="font-size:0.95rem; font-weight:800; margin-bottom:12px;"></div>
       <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
-        <button class="home-pill" onclick="enableTvCoopMode()">🛋️ Enable TV Sofa Mode (30m)</button>
-        <button class="icon-btn" onclick="exportScrollsJson()">⬇ Export JSON</button>
-        <button class="icon-btn" style="color:var(--red);" onclick="resetAllStatsConfirm()">Reset Stats</button>
+        <button class="home-pill tv-focusable" onclick="enableTvCoopMode()">🛋️ Enable TV Sofa Mode (60m)</button>
+        <button class="icon-btn tv-focusable" onclick="exportScrollsJson()">⬇ Export JSON</button>
+        <button class="icon-btn tv-focusable" style="color:var(--red);" onclick="resetAllStatsConfirm()">Reset Stats</button>
       </div>
       <div style="display:flex; gap:6px; margin-bottom:12px;">
         <input type="text" id="cloudEndpointInput" style="flex:1; padding:8px; border:2.5px solid #000;" placeholder="Firebase REST URL...">
-        <button class="icon-btn" onclick="saveCloudEndpoint()">Save</button>
+        <button class="icon-btn tv-focusable" onclick="saveCloudEndpoint()">Save</button>
       </div>
-      <button class="home-pill" style="width:100%; justify-content:center;" onclick="closeModals()">Close</button>
+      <button class="home-pill tv-focusable" style="width:100%; justify-content:center;" onclick="closeModals()">Close</button>
     </div>
   </div>
 </div>
@@ -1021,10 +1036,10 @@ const BYAKUGAN_DIAGRAMS = {
 const ALL_MISSIONS = [{"id": "BIO-01", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q01.1", "topicTag": "Heart & Blood Vessels", "category": "KEYWORDS", "marksLost": 2, "stasExamScore": "0 / 2", "svgKey": "HEART", "question": "Look at the heart diagram. Name blood vessel A (entering the right atrium from the body) and blood vessel B (leaving the right ventricle to the lungs). (2 marks)", "promptSub": "Select the 2 true Hand Seals below and avoid the Genjutsu traps!", "trueSeals": ["Vessel A is the Vena cava (brings deoxygenated blood from body into Right Atrium)", "Vessel B is the Pulmonary artery (carries blood away from Right Ventricle to lungs)"], "trapSeals": ["Vessel A is the Pulmonary artery and Vessel B is the Pulmonary vein (Stas's exam mistake)", "Vessel A is the Aorta pumping oxygenated blood into the atrium", "Vessel B is the Vena cava carrying blood into the lungs"], "manga": {"panel1Trap": "On your mock exam, you matched A to Pulmonary artery and B to Pulmonary vein (0/2 marks). You mixed up VEINS (which bring blood IN to the heart) with ARTERIES (which carry blood AWAY from the heart)!", "panel2Sensei": "Listen carefully! Remember two rules: 1) Anatomical diagrams are mirror-imaged, so the RIGHT side of the heart is on the LEFT of the page. 2) A = Artery = Away from ventricles; V = Vein = Visits the atria. Blood from the body enters the Right Atrium via the VENA CAVA (A), then leaves the Right Ventricle to the lungs via the PULMONARY ARTERY (B).", "panel3WhyAloud": "Why: Veins always bring blood into the atria, while arteries carry blood away from the ventricles, and Pulmonary means lungs.", "panel3MarkSchemeAloud": "Blood vessel A entering the right atrium is the vena cava. Blood vessel B leaving the right ventricle to the lungs is the pulmonary artery.", "voiceKeywords": ["vena cava", "right atrium", "pulmonary artery", "right ventricle"]}}, {"id": "BIO-02", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q01.2", "topicTag": "Heart & Pacemaker", "category": "KEYWORDS", "marksLost": 1, "stasExamScore": "0 / 1", "svgKey": "HEART", "question": "Where in the human heart is the natural pacemaker (sinoatrial node, Box F) located? (1 mark)", "promptSub": "Select the 1 true Hand Seal that correctly identifies the pacemaker location.", "trueSeals": ["In the wall of the RIGHT ATRIUM (Box F on the left side of the diagram)"], "trapSeals": ["In the wall of the left atrium (Box C - Stas's exam mistake)", "In the muscular septum between the two ventricles", "Inside the aorta valve at the top of the left ventricle"], "manga": {"panel1Trap": "You ticked Box C (the left atrium) on your exam and lost the mark! You forgot that medical diagrams show the patient facing you, so the patient's RIGHT atrium is on the left side of the drawing.", "panel2Sensei": "The natural pacemaker is a group of specialised cells located in the wall of the RIGHT ATRIUM (Box F). It sends electrical impulses across the atria to make them contract at a steady resting rhythm.", "panel3WhyAloud": "Why: The right atrium is drawn on the left side of a medical heart diagram, and its upper wall holds the pacemaker cells.", "panel3MarkSchemeAloud": "The natural pacemaker is located in the wall of the right atrium.", "voiceKeywords": ["natural pacemaker", "wall", "right atrium"]}}, {"id": "BIO-03", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q01.3", "topicTag": "Mitochondria & Respiration", "category": "KEYWORDS", "marksLost": 2, "stasExamScore": "1 / 3", "question": "Explain why heart muscle cells contain very large numbers of mitochondria. (3 marks)", "promptSub": "Select ALL 3 Mark Scheme Hand Seals needed for full 3/3 marks!", "trueSeals": ["For AEROBIC RESPIRATION (which takes place inside mitochondria)", "To RELEASE ENERGY (never write 'produce' or 'make' energy!)", "Required for continuous MUSCLE CONTRACTION to pump blood"], "trapSeals": ["Only writing 'to contract the heart' without naming respiration or energy (only gives 1/3 marks!)", "To create and produce new energy from oxygen", "To store blood and oxygen inside the heart muscle"], "manga": {"panel1Trap": "On the exam you only wrote 'to contract the heart' (1/3 marks). You skipped the two most important biology keywords that link mitochondria to muscle contraction!", "panel2Sensei": "Whenever AQA asks 'Why do cells have many mitochondria?' for 3 marks, it is ALWAYS a 3-step chain: 1) Mitochondria are the site of AEROBIC RESPIRATION. 2) Respiration RELEASES ENERGY (never say 'makes energy', as energy cannot be created!). 3) That energy is used for MUSCLE CONTRACTION (or active transport).", "panel3WhyAloud": "Why: Mitochondria carry out aerobic respiration to release the large amount of energy needed for non-stop heart muscle contraction.", "panel3MarkSchemeAloud": "Heart cells have many mitochondria for aerobic respiration, to release energy for muscle contraction.", "voiceKeywords": ["aerobic respiration", "release energy", "muscle contraction"]}}, {"id": "BIO-04", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q01.4", "topicTag": "Heart Septum Defect", "category": "KEYWORDS", "marksLost": 1, "stasExamScore": "1 / 2", "question": "A baby is born with a hole in the septum between the left and right ventricles. Give TWO symptoms the baby may experience. (2 marks)", "promptSub": "Select the 2 valid clinical symptoms accepted by AQA Mark Scheme.", "trueSeals": ["Breathlessness / difficulty breathing (shortness of breath)", "Tiredness / fatigue / lack of energy (because oxygenated and deoxygenated blood mix)"], "trapSeals": ["Lower blood pressure because the heart loses blood (Stas's mistake - blood stays inside the heart!)", "Excessive oxygen reaching the body muscles", "Immediate bacterial infection of the lungs"], "manga": {"panel1Trap": "You got 1 mark for 'trouble breathing', but your second point ('lower blood pressure as it loses some') scored 0. A hole in the septum is an internal wall gap between ventricles - blood is NOT leaking out of the body!", "panel2Sensei": "When there is a hole in the septum, deoxygenated blood from the right side mixes with oxygenated blood on the left side. This means blood pumped to the body carries LESS OXYGEN. Less oxygen means less aerobic respiration in cells, causing TIREDNESS / FATIGUE and BREATHLESSNESS.", "panel3WhyAloud": "Why: Oxygenated and deoxygenated blood mix through the hole, so less oxygen reaches body cells for respiration.", "panel3MarkSchemeAloud": "Two symptoms of a hole in the heart are breathlessness and tiredness or fatigue.", "voiceKeywords": ["breathlessness", "tiredness", "fatigue", "less oxygen"]}}, {"id": "BIO-05", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q02.5", "topicTag": "Vaccination & Immunity (6-Mark)", "category": "SIXMARK", "marksLost": 5, "stasExamScore": "1 / 6", "question": "Explain how the chickenpox vaccine makes a person immune to chickenpox. (6 marks)", "promptSub": "6-MARK BOSS: Select all 5 sequential steps of the immune response to charge your Odama Rasengan!", "trueSeals": ["1. Vaccine contains dead / inactive / weakened pathogen with specific ANTIGENS", "2. WHITE BLOOD CELLS (LYMPHOCYTES) recognise the foreign antigens", "3. Lymphocytes produce specific ANTIBODIES that lock onto the antigens", "4. MEMORY CELLS are produced and remain in the blood for years", "5. On re-infection with live virus, antibodies are produced MUCH FASTER and in GREATER QUANTITIES"], "trapSeals": ["The vaccine sends out already existing antibodies in the body (Stas's exam mistake - only 1/6 marks!)", "Red blood cells engulf and digest the virus using antibiotics", "The vaccine contains live antibodies that eat the chickenpox bacteria"], "manga": {"panel1Trap": "You scored only 1 out of 6 marks because you wrote: 'sends out already existing antibodies'. Before vaccination, your body does NOT have existing antibodies against chickenpox!", "panel2Sensei": "To get 6/6 on ANY vaccination question, memorise this 5-step story: 1) Vaccine injects dead/inactive pathogen carrying ANTIGENS. 2) WHITE BLOOD CELLS (lymphocytes) detect these antigens. 3) They produce complementary ANTIBODIES. 4) MEMORY CELLS stay in your blood. 5) If the real pathogen enters later, memory cells produce antibodies MUCH FASTER and in GREATER QUANTITIES before you feel ill!", "panel3WhyAloud": "Why: Vaccines train white blood cells using harmless antigens so that memory cells remain ready for a rapid secondary attack.", "panel3MarkSchemeAloud": "The vaccine contains inactive pathogen antigens. White blood cells produce specific antibodies and form memory cells. On reinfection, antibodies are produced much faster and in greater quantities.", "voiceKeywords": ["antigens", "white blood cells", "antibodies", "memory cells", "faster"]}}, {"id": "BIO-06", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q03.2", "topicTag": "Photosynthesis & Inverse Square Law", "category": "CALC", "marksLost": 2, "stasExamScore": "1 / 3", "calcTarget": "4", "calcAlternates": ["0.25", "1/4"], "calcUnit": "times smaller (1/4 as bright)", "unitChoices": ["times smaller (1/4 as bright)", "times larger (4x brighter)", "times smaller (1/2 as bright)", "cm^2"], "trapChecks": {"2": "GENJUTSU TRAP! Distance doubled (x2), but light follows the INVERSE SQUARE law (1 / d^2), so 2^2 = 4 times smaller!", "100": "You found 1/100 and 1/400 on the exam, but stopped! Divide 400 by 100 = 4 times smaller!"}, "question": "Light intensity follows the inverse square law (I is proportional to 1 / d^2). When the lamp distance increases from 10 cm to 20 cm, by what factor does light intensity decrease? (3 marks)", "promptSub": "Calculate the factor by which light intensity decreases when distance doubles from 10 cm to 20 cm.", "trueSeals": ["At 10 cm: 1 / 10^2 = 1/100 (0.01); at 20 cm: 1 / 20^2 = 1/400 (0.0025)", "Light intensity DECREASES by a factor of 4 (becomes a quarter / 1/4)"], "trapSeals": ["Writing 1/100 and 1/400 without comparing them (Stas's exam mistake - lost 2 marks!)", "Light intensity decreases by half (factor of 2)"], "manga": {"panel1Trap": "On the exam, you did the hard part right: you wrote 1/100 and 1/400 (1 mark). But you never compared them! Your teacher wrote 'by how much?' in red ink and you lost 2 easy marks.", "panel2Sensei": "According to the Inverse Square Law, when distance d DOUBLES (from 10 cm to 20 cm, which is x2), the light spreads out over 2^2 = 4 times the area. Therefore, 1/400 is ONE QUARTER of 1/100. Always finish with the comparison sentence: 'Light intensity decreases by a factor of 4 (or becomes a quarter)!'", "panel3WhyAloud": "Why: Doubling the distance spreads light over four times the area because two squared equals four.", "panel3MarkSchemeAloud": "At ten centimetres it is one over one hundred, and at twenty centimetres it is one over four hundred, so light intensity decreases by a factor of four.", "voiceKeywords": ["one hundred", "four hundred", "decreases", "factor of four"]}}, {"id": "BIO-07", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q03.3", "topicTag": "Enzymes & Kinetic Energy", "category": "KEYWORDS", "marksLost": 2, "stasExamScore": "1 / 3", "question": "A photosynthesis investigation at 10°C was repeated at 20°C. Explain how and why the volume of oxygen collected changes. (3 marks)", "promptSub": "Select the 3 scientific Mark Scheme seals (no everyday phrases like 'better conditions'!).", "trueSeals": ["Volume of oxygen collected INCREASES (higher rate of photosynthesis)", "ENZYMES and substrate molecules have more KINETIC ENERGY, causing more frequent collisions", "Only increases at SHORT lamp distances (where light intensity is NOT the limiting factor)"], "trapSeals": ["20°C gives better conditions for the plant to live (Stas's vague phrasing - 0 marks for explanation!)", "Enzymes denature and die at 20°C", "Warm water creates extra oxygen bubbles by boiling"], "manga": {"panel1Trap": "You got 1 mark for saying more gas is collected, but wrote 'better conditions for plant' for the reason. In GCSE Biology, vague everyday phrases like 'better conditions' NEVER score marks!", "panel2Sensei": "Whenever temperature increases from 10°C to 20°C in plants or humans, think ENZYMES! Warmer temperature gives enzyme and substrate molecules MORE KINETIC ENERGY. They move faster and have MORE FREQUENT SUCCESSFUL COLLISIONS. Bonus 3rd mark: this only helps near the lamp where light is bright enough not to be the limiting factor!", "panel3WhyAloud": "Why: Raising temperature from ten to twenty degrees gives photosynthetic enzymes more kinetic energy so they collide more frequently with substrates.", "panel3MarkSchemeAloud": "More oxygen is collected because enzymes have more kinetic energy and more frequent collisions at short lamp distances.", "voiceKeywords": ["enzymes", "kinetic energy", "frequent collisions", "limiting factor"]}}, {"id": "BIO-08", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q03.4", "topicTag": "Enzyme Denaturation", "category": "KEYWORDS", "marksLost": 1, "stasExamScore": "1 / 2", "question": "Explain what happens to the volume of oxygen collected when the aquatic plant is heated to 80°C. (2 marks)", "promptSub": "Select the 2 Mark Scheme seals that explain what happens at 80°C.", "trueSeals": ["No oxygen is collected / rate of photosynthesis falls to zero", "Because the ENZYMES DENATURE (the active site changes shape)"], "trapSeals": ["80°C is too high for plant adaptation (Stas's exam mistake - missing the word 'denature'!)", "The enzymes are killed because enzymes are living cells", "The chloroplasts evaporate into the water"], "manga": {"panel1Trap": "You wrote 'too high for adaptation' and missed the 2nd mark. Also remember: never say 'enzymes die' because enzymes are protein molecules, not living organisms!", "panel2Sensei": "At high temperatures like 80°C, the thermal energy breaks the bonds holding the enzyme protein together. The ENZYMES DENATURE - meaning their ACTIVE SITE permanently changes shape so the substrate can no longer fit (lock and key fails).", "panel3WhyAloud": "Why: Extreme heat breaks bonds inside the enzyme protein, permanently warping its active site so reactions stop.", "panel3MarkSchemeAloud": "No oxygen is produced at eighty degrees because the enzymes denature and the active site changes shape.", "voiceKeywords": ["enzymes denature", "active site", "changes shape"]}}, {"id": "BIO-09", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q04.1", "topicTag": "Osmosis Required Practical", "category": "KEYWORDS", "marksLost": 1, "stasExamScore": "0 / 1", "question": "In the potato osmosis investigation, why did the student calculate the PERCENTAGE increase in mass rather than just using the change in mass in grams? (1 mark)", "promptSub": "Select the classic 1-mark AQA Required Practical answer.", "trueSeals": ["Because the potato pieces had DIFFERENT STARTING MASSES (initial masses), allowing a fair comparison"], "trapSeals": ["Because percentages make the numbers easier to manipulate (Stas's exam mistake - 0/1)", "Because electronic balances can only measure in percentages", "To prevent water from evaporating out of the beaker"], "manga": {"panel1Trap": "You wrote 'numbers are easy to manipulate' (0/1). Actually, calculating percentages is an extra maths step - scientists don't do it for fun!", "panel2Sensei": "This exact question appears almost every year on Biology Paper 1! When you cut 5 potato cylinders or cubes, it is almost impossible to cut them to the exact same gram weight. Because the pieces have DIFFERENT STARTING MASSES (initial masses), calculating PERCENTAGE change in mass is the only way to make a valid, fair comparison!", "panel3WhyAloud": "Why: Since each cut piece of potato starts with a slightly different weight, percentage change lets us compare them fairly.", "panel3MarkSchemeAloud": "Percentage change in mass is calculated because the potato pieces had different starting masses.", "voiceKeywords": ["percentage", "different", "starting masses"]}}, {"id": "BIO-10", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q04.2 - Q04.3", "topicTag": "Osmosis vs Diffusion", "category": "KEYWORDS", "marksLost": 3, "stasExamScore": "1 / 4", "question": "Explain why the mass of the potato cubes increased in distilled water, and describe how increasing surface area affected the % increase in mass. (4 marks)", "promptSub": "Select all 4 true Hand Seals. Do NOT confuse osmosis with diffusion!", "trueSeals": ["Water moves into the potato cells by OSMOSIS (never write diffusion for water across a membrane!)", "Across a PARTIALLY PERMEABLE MEMBRANE from a dilute solution to a more concentrated cell solution", "As surface area increases, the percentage increase in mass INCREASES", "However, the rate of increase slows down / levels off at larger surface areas"], "trapSeals": ["Crossing out 'osmosis' and replacing it with 'diffusion' (Stas's painful exam mistake!)", "Salt particles move into the distilled water by active transport", "As surface area increases, the percentage mass gain decreases linearly"], "manga": {"panel1Trap": "Look at your exam paper: you actually wrote the correct word 'osmosis', and then CROSSED IT OUT and wrote 'diffusion'! That self-doubt cost you marks in both Q04.2 and Q04.3.", "panel2Sensei": "Lock this rule in forever: whenever WATER moves across a cell's PARTIALLY PERMEABLE MEMBRANE from a dilute solution (pure water) into a more concentrated solution (potato cell sap), the word is ALWAYS OSMOSIS! Also, when describing a data table trend for 2 marks, state both parts: as surface area increases, % mass gain increases, but at a decreasing rate.", "panel3WhyAloud": "Why: Water moving across a partially permeable cell membrane down a water gradient is strictly defined as osmosis, never simple diffusion.", "panel3MarkSchemeAloud": "Water enters the potato cells by osmosis across a partially permeable membrane from a dilute solution to a more concentrated solution.", "voiceKeywords": ["osmosis", "partially permeable membrane", "dilute", "concentrated"]}}, {"id": "BIO-11", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q04.4 - Q04.5", "topicTag": "Osmosis Equilibrium & Method", "category": "KEYWORDS", "marksLost": 3, "stasExamScore": "2 / 5", "question": "1) Predict how leaving all 5 cut potato samples (A-E) in water for 24 hours instead of 30 minutes affects their % mass gain (3m). 2) How should the method be changed to investigate salt concentration (2m)?", "promptSub": "Select the 3 true Hand Seals covering 24-hour turgor saturation and salt concentration.", "trueSeals": ["After 24 hours, ALL samples (A-E) will reach the SAME maximum percentage increase in mass (above 5.6%)", "Because all cells become fully TURGID (completely full of water, so net osmosis stops)", "To test salt concentration: use a RANGE OF DIFFERENT CONCENTRATIONS of salt solution while keeping potato surface area constant"], "trapSeals": ["Sample E will keep absorbing water forever until the beaker is empty", "Keep using only pure distilled water and cut the potato into 10 pieces", "After 24 hours all potato pieces shrink to zero mass"], "manga": {"panel1Trap": "In Q04.4 you got 1 mark for saying water uptake stops because cells are full, but missed 2 marks because you didn't state that ALL 5 samples (A to E) end up at the EXACT SAME final % increase in mass!", "panel2Sensei": "Think about it: cutting a potato cube into smaller pieces only increases Surface Area, which speeds up the RATE of osmosis over 30 minutes. Given 24 hours, even the whole uncut cube finishes absorbing water! Every sample reaches the SAME maximum % mass gain when all cells are fully TURGID. And to test salt concentration, your independent variable must be a RANGE OF DIFFERENT SALT CONCENTRATIONS.", "panel3WhyAloud": "Why: Surface area only changes how fast water enters, not how much total water the cells can hold when fully turgid after twenty-four hours.", "panel3MarkSchemeAloud": "After twenty-four hours all samples reach the same maximum percentage increase in mass because the cells are fully turgid. For salt, use a range of different concentrations of salt solution.", "voiceKeywords": ["same maximum", "turgid", "range", "different concentrations"]}}, {"id": "BIO-12", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q05.1", "topicTag": "Anaerobic Respiration in Plants", "category": "KEYWORDS", "marksLost": 2, "stasExamScore": "0 / 2", "question": "Name the TWO products of anaerobic respiration in PLANT cells (and yeast). (2 marks)", "promptSub": "Select the 2 products formed when plants or yeast respire without oxygen.", "trueSeals": ["ETHANOL", "CARBON DIOXIDE (CO2)"], "trapSeals": ["Glucose (Stas's exam mistake - glucose is the REACTANT broken down, never a product!)", "Lactic acid (Stas's exam mistake - lactic acid is only made in ANIMAL muscle cells!)", "Oxygen and water"], "manga": {"panel1Trap": "You ticked 'Glucose' and 'Lactic acid' (0/2 marks). Two huge traps: 1) Glucose is the fuel that goes IN to respiration, never a product! 2) Lactic acid is only produced in ANIMALS (human muscles), NOT in plants!", "panel2Sensei": "Compare the two equations for Anaerobic Respiration (no oxygen): In HUMAN MUSCLES: Glucose -> Lactic acid (only 1 product, no gas). In PLANTS and YEAST (Fermentation): Glucose -> ETHANOL + CARBON DIOXIDE! That is how yeast makes beer (ethanol) and makes bread rise (carbon dioxide bubbles)!", "panel3WhyAloud": "Why: Unlike animal muscles which make lactic acid, plants and yeast ferment glucose into ethanol and carbon dioxide gas.", "panel3MarkSchemeAloud": "The two products of anaerobic respiration in plant cells are ethanol and carbon dioxide.", "voiceKeywords": ["anaerobic respiration", "plant cells", "ethanol", "carbon dioxide"]}}, {"id": "BIO-13", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q05.3", "topicTag": "Leaf Adaptations (Palisade)", "category": "KEYWORDS", "marksLost": 2, "stasExamScore": "0 / 2", "svgKey": "LEAF_TRANSPIRATION", "question": "In Q05.2 you correctly named Tissue A as Palisade Mesophyll. Now describe TWO ways palisade mesophyll tissue is adapted for photosynthesis. (2 marks)", "promptSub": "Look at Tissue A in the leaf diagram above and select its 2 adaptations.", "trueSeals": ["Cells are packed with MANY CHLOROPLASTS (containing chlorophyll to absorb light)", "Tall column-shaped cells packed closely near the TOP OF THE LEAF to receive maximum light"], "trapSeals": ["Long hollow dead tubes to transport water (Stas's exam mistake - that is Xylem, not mesophyll!)", "Covered in root hairs to absorb minerals from the soil", "Contains no cell walls so gases can pass straight through"], "manga": {"panel1Trap": "You knew the name 'Palisade mesophyll' in Q05.2 (1/1), but in Q05.3 you wrote 'long tubes to transport' (0/2). You confused palisade leaf cells with Xylem water tubes!", "panel2Sensei": "Look at the green column cells right under the upper epidermis in Diagram 2. What is their job? PHOTOSYNTHESIS! How are they adapted for maximum photosynthesis? 1) Each cell is packed with MANY CHLOROPLASTS. 2) They are arranged vertically and tightly packed near the TOP SURFACE OF THE LEAF where sunlight hits first!", "panel3WhyAloud": "Why: Palisade mesophyll is the main site of photosynthesis, so it sits at the top of the leaf packed with light-absorbing chloroplasts.", "panel3MarkSchemeAloud": "Palisade mesophyll cells contain many chloroplasts and are packed near the top of the leaf to absorb maximum light.", "voiceKeywords": ["many chloroplasts", "top of the leaf", "absorb", "light"]}}, {"id": "BIO-14", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q05.4", "topicTag": "Transpiration Stream (5-Mark)", "category": "SIXMARK", "marksLost": 3, "stasExamScore": "2 / 5", "svgKey": "LEAF_TRANSPIRATION", "question": "Describe the pathway of water from the soil, through the plant, and out into the atmosphere. (5 marks)", "promptSub": "Select all 4 sequential stages of the Transpiration Stream shown in Diagram 2.", "trueSeals": ["1. Water enters ROOT HAIR CELLS from the soil by OSMOSIS", "2. Water travels up the stem to the leaves through hollow XYLEM vessels", "3. Inside the leaf, water EVAPORATES from mesophyll cell surfaces into the air spaces", "4. Water vapour DIFFUSES out of the leaf into the atmosphere through open STOMATA"], "trapSeals": ["After reaching the leaf, water turns into oxygen and glucose (Stas's exam detour - lost 3 marks!)", "Water is pumped down the phloem tubes by translocation into the soil", "Liquid water drips out through the waxy cuticle on top of the leaf"], "manga": {"panel1Trap": "You started great: root hairs -> xylem to the leaves (2/5 marks). Then you got distracted by photosynthesis and wrote about releasing oxygen! The question asked ONLY for the pathway of WATER into the air.", "panel2Sensei": "Follow the blue arrow in Diagram 2 from bottom to top: 1) Water enters ROOT HAIR CELLS by OSMOSIS. 2) It moves up the stem through XYLEM vessels (the transpiration stream). 3) In the spongy mesophyll, liquid water EVAPORATES from cell surfaces into air spaces. 4) Finally, water vapour DIFFUSES out through tiny pores called STOMATA!", "panel3WhyAloud": "Why: Water is pulled up the xylem because water evaporates inside the leaf and diffuses out through the stomata.", "panel3MarkSchemeAloud": "Water enters root hair cells by osmosis, travels up the xylem vessels to the leaves, evaporates from mesophyll cells into air spaces, and water vapour diffuses out through open stomata.", "voiceKeywords": ["root hair cells", "osmosis", "xylem", "evaporates", "stomata"]}}, {"id": "BIO-15", "subject": "BIO", "subjectTitle": "Biology 1H", "senseiName": "Lady Tsunade (Fifth Hokage)", "qRef": "Q06.2, Q06.4, Q06.6", "topicTag": "Stem Cells & Red Blood Cells (6-Mark)", "category": "SIXMARK", "marksLost": 6, "stasExamScore": "3 / 9", "question": "1) State the function of cilia in the female oviduct (1m). 2) Why does anaemia (low RBCs) cause muscle fatigue (2m)? 3) Evaluate lab-grown RBCs from a patient's own stem cells vs donor blood transfusion (6m).", "promptSub": "Remember: You crushed the microscope & standard form maths in Q6.3 & Q6.5 (9/9)! Now nail the 5 biology seals here.", "trueSeals": ["Oviduct cilia: MOVE / WAFT the egg cell along the oviduct towards the uterus", "Anaemia fatigue: Less oxygen carried -> muscles use ANAEROBIC respiration -> LACTIC ACID builds up", "Stem cell RBC advantage 1: NO RISK OF REJECTION because made from the patient's own genetically identical cells", "Stem cell RBC advantage 2: No risk of transmitting donor INFECTIONS / pathogens, and all cells last the full 120 days", "Donor blood advantage + Conclusion: Much cheaper (£130 vs £705 per bag) and provides plasma/platelets too + justified conclusion"], "trapSeals": ["Cilia in the oviduct trap dust and dirt from breathing (Stas's mistake - confused oviduct with trachea!)", "Donor blood has zero risk of rejection or infection", "Lab-grown stem cell blood is cheaper than £130 per bag"], "manga": {"panel1Trap": "First, massive respect: you scored 9/9 on the hardest maths in Biology (Q6.3 & Q6.5)! In Q6.2 you confused cilia in the oviduct (fallopian tube) with cilia in the windpipe. And in Q6.6 you compared cost (£705 vs £130) and 120 days (2/6), but forgot the medical advantages of using a patient's OWN stem cells!", "panel2Sensei": "Three quick wins: 1) In the oviduct, cilia WAFT THE EGG CELL to the uterus. 2) Anaemia means less O2 -> anaerobic respiration -> LACTIC ACID causes muscle fatigue. 3) Why grow blood from the patient's own adult stem cells? Identical DNA means NO IMMUNE REJECTION and NO DONOR INFECTIONS! Balance that against high cost (£705 vs £130) and end with a clear judgement.", "panel3WhyAloud": "Why: Cells grown from the patient's own stem cells have identical antigens, so the immune system will not reject them.", "panel3MarkSchemeAloud": "Cilia move the egg cell to the uterus. In anaemia, anaerobic respiration causes lactic acid build-up. Lab-grown red blood cells from the patient's own stem cells have no risk of rejection and no risk of donor infection, although donor blood is much cheaper.", "voiceKeywords": ["egg cell", "lactic acid", "no risk of rejection", "infection", "cheaper"]}}, {"id": "PHYS-01", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q01.2 & Q01.6", "topicTag": "Biofuels & Environmental Impact", "category": "KEYWORDS", "marksLost": 2, "stasExamScore": "1 / 3", "question": "1) Name the renewable fuel made from plant material (1m). 2) Describe one negative ENVIRONMENTAL impact of wind turbines (1m).", "promptSub": "Select the 2 exact Physics terms. Watch out for the money vs environment trap!", "trueSeals": ["Fuel made from plant material is called BIOFUEL (or biomass)", "Environmental impact of wind turbines: VISUAL pollution, NOISE pollution, or killing birds / bats (habitat disruption)"], "trapSeals": ["Wind turbines are expensive to build (Stas's exam mistake - cost is an ECONOMIC factor, NOT environmental!)", "Biodegradable fuel (Stas's spelling confusion on the exam)", "Wind turbines release huge amounts of carbon dioxide while spinning"], "manga": {"panel1Trap": "In Q01.2 you first wrote 'bioligredable fuel' (confusing biodegradable with biofuel). In Q01.6, the question asked for an ENVIRONMENTAL impact of wind turbines, and you wrote 'expensive to build' (0 marks)!", "panel2Sensei": "Read the bold word in the question! If AQA asks for an ENVIRONMENTAL impact, never talk about money or cost (£)! Environmental impacts affect nature, wildlife, or the landscape: for wind turbines, write VISUAL POLLUTION, NOISE POLLUTION, or HARM TO BIRDS AND BATS. And plant fuel is simply BIOFUEL.", "panel3WhyAloud": "Why: Cost is an economic issue, whereas environmental impacts affect wildlife, habitats, noise, or the landscape.", "panel3MarkSchemeAloud": "Fuel made from plant material is biofuel. Negative environmental impacts of wind turbines include visual pollution, noise pollution, and harm to birds.", "voiceKeywords": ["biofuel", "visual pollution", "noise pollution", "birds"]}}, {"id": "PHYS-02", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q01.5", "topicTag": "Energy Grid Transition", "category": "KEYWORDS", "marksLost": 1, "stasExamScore": "1 / 2", "question": "Explain why electricity generation from fossil fuels cannot be replaced immediately by renewable energy resources. (2 marks)", "promptSub": "Select the 2 realistic engineering and physics reasons.", "trueSeals": ["Fossil fuels currently supply a very large proportion of baseline electricity demand", "It takes many years and high capital cost to build enough renewable infrastructure (and wind/solar are weather-dependent / unreliable)"], "trapSeals": ["Because it would destroy fossil fuel companies and destroy their profit (Stas's exam answer - 0 marks)", "Because renewable energy is illegal to connect to the National Grid", "Because solar panels only work at night"], "manga": {"panel1Trap": "You got 1 mark for noting how many fossil fuel stations exist, but lost the 2nd mark for writing 'destroy them and destroy their profit'. Examiners want engineering and physics reasons, not conspiracy theories!", "panel2Sensei": "Why can't the UK switch off all gas Power Stations tomorrow? Two solid Physics reasons: 1) It takes a long time and high construction cost to build thousands of new wind turbines, solar farms, and nuclear plants. 2) Renewables like wind and solar are UNRELIABLE (weather-dependent), so we need massive energy storage or backup first.", "panel3WhyAloud": "Why: Building enough renewable power stations takes many years, and wind and solar depend on weather conditions.", "panel3MarkSchemeAloud": "It takes a long time and high cost to build enough renewable power stations, and solar and wind power are unreliable because they depend on the weather.", "voiceKeywords": ["long time", "build", "unreliable", "weather"]}}, {"id": "PHYS-03", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q02.1 & Q02.3", "topicTag": "Specific Heat Capacity & Insulation", "category": "CALC", "marksLost": 2, "stasExamScore": "3 / 5", "calcTarget": "920", "calcAlternates": ["920.0"], "calcUnit": "J/kg°C", "unitChoices": ["J/kg°C", "J", "W", "kg/m^3"], "trapChecks": {"0.001": "GENJUTSU TRAP! You divided (m x Δθ) by ΔE! Formula is c = ΔE / (m x Δθ) = 13800 / (0.75 x 20) = 920!"}, "question": "1) Calculate the Specific Heat Capacity (c) of aluminium when ΔE = 13,800 J, mass m = 0.75 kg, and temperature rise Δθ = 20°C (3m). 2) Why does wrapping the block in thermal insulation improve accuracy (2m)?", "promptSub": "Calculate c = ΔE / (m × Δθ) and remember why insulation is used!", "trueSeals": ["c = 13,800 ÷ (0.75 × 20) = 13,800 ÷ 15 = 920 J/kg°C (and ALWAYS cross out wrong rough work!)", "Thermal insulation REDUCES thermal energy transferred / dissipated to the surroundings (so more energy stays in the block)"], "trapSeals": ["The insulation heats the aluminium block (Stas's exam mistake in Q02.3 - insulation NEVER generates heat!)", "Leaving inverted working '15 / 13800' uncrossed next to 920 (cost Stas 1 mark in Q02.1!)"], "manga": {"panel1Trap": "Two painful traps here! In Q02.1 you actually calculated the right answer (920), but lost 1 mark because you left your upside-down rough work '(0.75 x 20) / 13800' uncrossed! And in Q02.3 you ticked 'The insulation heats the block'!", "panel2Sensei": "Rule 1: Always draw a neat line through rough mistakes so the examiner only marks your final formula: c = ΔE / (m x Δθ) = 13800 / 15 = 920 J/kg°C. Rule 2: A coat or fibreglass insulation does NOT create heat! It simply REDUCES THERMAL ENERGY DISSIPATED (lost) to the surrounding air, ensuring almost all electrical energy goes into heating the block.", "panel3WhyAloud": "Why: Insulation has no heater inside it; it simply slows down heat loss from the warm metal block to the cold room.", "panel3MarkSchemeAloud": "Specific heat capacity equals thirteen thousand eight hundred divided by fifteen which is nine hundred and twenty. Thermal insulation reduces thermal energy transferred to the surroundings.", "voiceKeywords": ["nine hundred and twenty", "insulation", "reduces", "energy", "surroundings"]}}, {"id": "PHYS-04", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q02.2", "topicTag": "SHC Required Practical (6-Mark)", "category": "SIXMARK", "marksLost": 4, "stasExamScore": "2 / 6", "question": "Describe a laboratory method to determine the specific heat capacity of an aluminium block. State the measurements and apparatus needed. (6 marks)", "promptSub": "6-MARK REQUIRED PRACTICAL: Select all 5 essential steps (Apparatus + Measurements + Equation)!", "trueSeals": ["1. Measure the MASS (m) of the metal block using a TOP-PAN BALANCE", "2. Measure INITIAL and FINAL TEMPERATURE (to find Δθ) using a THERMOMETER placed in the block", "3. Measure electrical ENERGY supplied (ΔE) directly using a JOULEMETER...", "4. ...OR measure current (AMMETER), potential difference (VOLTMETER) and time (STOPCLOCK) and use E = I × V × t", "5. Wrap the block in THERMAL INSULATION and calculate c = ΔE ÷ (m × Δθ)"], "trapSeals": ["Writing just 1 sentence mentioning mass and temperature without naming any instruments or how to measure energy (Stas's 2/6 answer!)", "Burn the aluminium block with a Bunsen burner and weigh the ashes", "Measure the volume of the block with a ruler and multiply by gravity"], "manga": {"panel1Trap": "You stopped after ONE sentence ('measure mass and initial and final temperature' - 2/6 marks). You didn't name a single piece of equipment and never explained how to measure the Energy (ΔE)!", "panel2Sensei": "Every Required Practical 6-marker is easy if you look at the formula on your Equations Sheet: c = ΔE / (m x Δθ). You just state what measures each letter! 1) m = Mass measured with a BALANCE. 2) Δθ = Temperature change measured with a THERMOMETER. 3) ΔE = Energy measured with a JOULEMETER (or AMMETER + VOLTMETER + STOPCLOCK using E = VIt). 4) Insulate the block and substitute into c = ΔE / (m x Δθ)!", "panel3WhyAloud": "Why: To find specific heat capacity from the formula, we must measure mass, temperature change, and electrical energy supplied using the right instruments.", "panel3MarkSchemeAloud": "Measure the mass of the block with a balance, and the temperature change with a thermometer. Measure the electrical energy supplied using a joulemeter, or an ammeter, voltmeter and stopclock with E equals V I t.", "voiceKeywords": ["balance", "thermometer", "joulemeter", "ammeter", "voltmeter"]}}, {"id": "PHYS-05", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q03.1", "topicTag": "Circuit Diagrams (V & A)", "category": "KEYWORDS", "marksLost": 1, "stasExamScore": "2 / 3", "svgKey": "CIRCUIT_RESISTOR", "question": "Look at Diagram 4 above. How must the Ammeter (A) and Voltmeter (V) be connected in a circuit to measure the resistance of resistor R? (3 marks)", "promptSub": "Select the 2 true circuit connection rules.", "trueSeals": ["Connect the AMMETER in SERIES in the main circuit loop", "Connect the VOLTMETER in PARALLEL strictly across the resistor R"], "trapSeals": ["Connect the voltmeter in parallel across the ammeter (Stas's exam mistake - lost 1 mark!)", "Connect the voltmeter in series inside the main loop", "Connect the ammeter in parallel across the battery"], "manga": {"panel1Trap": "You knew all the right circuit symbols (2/3 marks), but you drew the Voltmeter loop across the Ammeter instead of across the Resistor R!", "panel2Sensei": "Look at Diagram 4 above: we want to find the resistance of RESISTOR R (using R = V / I). So the Voltmeter must hug RESISTOR R in PARALLEL to measure the potential difference across that resistor! If you put the voltmeter across the ammeter, it reads 0 V because an ammeter has almost zero resistance.", "panel3WhyAloud": "Why: A voltmeter measures potential difference between two points, so it must be connected in parallel across the resistor being tested.", "panel3MarkSchemeAloud": "The ammeter is connected in series, and the voltmeter is connected in parallel across the resistor.", "voiceKeywords": ["ammeter", "series", "voltmeter", "parallel", "resistor"]}}, {"id": "PHYS-06", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q03.2", "topicTag": "Skipped Formula: Ohm's Law & mA", "category": "CALC", "marksLost": 4, "stasExamScore": "0 / 4 (SKIPPED!)", "calcTarget": "6", "calcAlternates": ["6.0"], "calcUnit": "Ω", "unitChoices": ["Ω", "mA", "V", "W"], "trapChecks": {"0.006": "GENJUTSU UNIT TRAP! You forgot to convert 450 mA into Amps first! 450 mA ÷ 1000 = 0.45 A. Then R = 2.7 ÷ 0.45 = 6 Ω!", "1.215": "TRAP! You multiplied V × I instead of dividing! V = I × R, so R = V ÷ I = 2.7 ÷ 0.45 = 6 Ω!"}, "question": "When the current in a resistor is 450 mA, the potential difference across it is 2.7 V. Calculate the resistance of the resistor in Ohms (Ω). (4 marks)", "promptSub": "NEVER SKIP FORMULA QUESTIONS! Convert 450 mA to Amps (÷ 1000), then use V = I × R.", "trueSeals": ["Step 1 (Unit conversion): I = 450 mA = 450 ÷ 1000 = 0.45 A", "Step 2 (Rearrange V = I × R): R = V ÷ I = 2.7 ÷ 0.45 = 6 Ω"], "trapSeals": ["Leaving the question completely blank (Stas's exam mistake - gave away 4 easy marks!)", "Dividing 2.7 by 450 without converting mA to A (gives 0.006 Ω)"], "manga": {"panel1Trap": "You left Q03.2 COMPLETELY BLANK (0/4 marks)! Why? The equation V = I x R is printed right on your Physics Equations Sheet! Never leave a calculation blank on a Physics paper!", "panel2Sensei": "Here is how you claim all 4 marks in 20 seconds: 1) Spot the prefix 'milli' (mA): divide by 1000 -> 450 mA = 0.45 A. 2) Pick V = I x R from your formula sheet. 3) Rearrange: R = V / I = 2.7 / 0.45 = 6 Ω! Even if you forget the unit conversion, substituting into the formula still wins 2-3 marks!", "panel3WhyAloud": "Why: Milliamps must be divided by one thousand to get amps before dividing voltage by current using Ohm's law.", "panel3MarkSchemeAloud": "Convert four hundred and fifty milliamps to zero point four five amps. Resistance equals voltage divided by current, so two point seven divided by zero point four five equals six ohms.", "voiceKeywords": ["zero point four five", "resistance", "voltage", "current", "six ohms"]}}, {"id": "PHYS-07", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q03.4", "topicTag": "Skipped Formula: P = I²R & kΩ", "category": "CALC", "marksLost": 4, "stasExamScore": "0 / 4 (SKIPPED!)", "calcTarget": "0.317", "calcAlternates": ["0.32", "0.3168"], "calcUnit": "W", "unitChoices": ["W", "kΩ", "A", "J"], "trapChecks": {"0.000317": "GENJUTSU UNIT TRAP! You forgot to convert 2.2 kΩ into Ohms! 2.2 kΩ × 1000 = 2200 Ω. Then P = 0.012² × 2200 = 0.317 W!", "26.4": "TRAP! Remember to SQUARE the current in P = I² × R: (0.012)² × 2200 = 0.317 W!"}, "question": "A circuit requires a 2.2 kΩ resistor carrying a current of 0.012 A. Calculate the power (W) dissipated in the resistor (using P = I²R) to see which resistors (A: 1.0W, B: 0.5W, C: 2.0W, D: 0.25W) can be used safely. (4 marks)", "promptSub": "Convert 2.2 kΩ to Ohms (× 1000), then calculate P = (0.012)² × 2200!", "trueSeals": ["Step 1 (Unit conversion): R = 2.2 kΩ = 2.2 × 1000 = 2200 Ω", "Step 2 (Formula P = I²R): P = (0.012)² × 2200 = 0.317 W (so resistors A, B, and C rated >= 0.5 W are safe)"], "trapSeals": ["Skipping the question completely (Stas's exam mistake - lost 4 marks!)", "Choosing Resistor D (0.25 W), which would overheat because 0.317 W > 0.25 W"], "manga": {"panel1Trap": "You skipped Q03.4 completely too (0/4 marks)! That is 8 marks lost in Question 3 alone just from skipping two standard equations that are given on the Equations Sheet!", "panel2Sensei": "Look at what you are given: Current I = 0.012 A, Resistance R = 2.2 kΩ, and the question asks about Power P. On the Equations Sheet, find P = I² x R! 1) Convert kilo-ohms: 2.2 x 1000 = 2200 Ω. 2) Calculate P = 0.012² x 2200 = 0.317 W. 3) Since the resistor dissipates 0.317 W, any resistor rated above 0.317 W (A = 1.0W, B = 0.5W, C = 2.0W) is safe!", "panel3WhyAloud": "Why: Multiply kilohms by one thousand to get ohms, then multiply current squared by resistance to find the power in watts.", "panel3MarkSchemeAloud": "Two point two kilohms is two thousand two hundred ohms. Power equals current squared times resistance, giving zero point three one seven watts, so resistors A, B and C can be used.", "voiceKeywords": ["two thousand two hundred", "current squared", "resistance", "watts"]}}, {"id": "PHYS-08", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q04.1", "topicTag": "Nature of Alpha, Beta, Gamma", "category": "KEYWORDS", "marksLost": 3, "stasExamScore": "0 / 3", "question": "Describe the nature of alpha (α), beta (β), and gamma (γ) radiation (what each type of radiation actually consists of). (3 marks)", "promptSub": "Select all 3 true physical descriptions (NOT penetration strength!).", "trueSeals": ["ALPHA (α) radiation is a HELIUM NUCLEUS (consisting of 2 protons and 2 neutrons)", "BETA (β) radiation is a high-speed ELECTRON ejected from the nucleus (when a neutron turns into a proton)", "GAMMA (γ) radiation is a high-frequency ELECTROMAGNETIC WAVE (not a particle)"], "trapSeals": ["Alpha is the weakest, Beta is the middle, Gamma is the strongest (Stas's exam mistake - 0/3 marks!)", "Alpha is a whole helium atom with orbiting electrons", "Gamma radiation is a heavy positively charged neutron"], "manga": {"panel1Trap": "You wrote 'weakest / middle / strongest' and scored 0/3! When AQA asks 'Describe the NATURE of alpha, beta and gamma radiation', they are asking WHAT THEY ARE MADE OF, not their penetrating power!", "panel2Sensei": "Memorise these three exact identities: 1) ALPHA = a HELIUM NUCLEUS (2 protons + 2 neutrons, never say helium atom!). 2) BETA = a fast-moving ELECTRON emitted from the nucleus. 3) GAMMA = an ELECTROMAGNETIC WAVE!", "panel3WhyAloud": "Why: The nature of radiation means its physical identity as either subatomic particles or electromagnetic waves.", "panel3MarkSchemeAloud": "Alpha radiation is a helium nucleus made of two protons and two neutrons. Beta radiation is a fast-moving electron from the nucleus. Gamma radiation is an electromagnetic wave.", "voiceKeywords": ["helium nucleus", "electron", "electromagnetic wave"]}}, {"id": "PHYS-09", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q04.2", "topicTag": "Beta Decay Nuclear Equation", "category": "KEYWORDS", "marksLost": 2, "stasExamScore": "0 / 2", "question": "Complete the nuclear equation for the beta (β) decay of gold-198 (mass number = 198, atomic number = 79) into mercury (Hg) and a beta particle (β). (2 marks)", "promptSub": "Select the 2 correct number pairs for Mercury (Hg) and the Beta particle (β).", "trueSeals": ["Beta particle (β) has top mass number = 0 and bottom charge number = -1", "Mercury (Hg) has top mass number = 198 (unchanged) and bottom atomic number = 80 (increases by +1 because 80 + (-1) = 79)"], "trapSeals": ["Writing -198 / 79 on both particles (Stas's exam mistake - 0/2 marks!)", "Decreasing the mass number by 4 and atomic number by 2 (that is Alpha decay, not Beta!)", "Mercury atomic number drops to 78"], "manga": {"panel1Trap": "You wrote '-198' and '79' in the boxes (0/2 marks). You didn't know the numbers for a Beta particle!", "panel2Sensei": "In Beta decay, a neutron inside the nucleus turns into a proton and shoots out an electron (the beta particle): 1) Since an electron has virtually zero mass and a charge of -1, the Beta symbol is ALWAYS 0 on top and -1 on the bottom! 2) Now balance the equation: Top row: 198 = 198 + 0 (mass stays 198!). Bottom row: 79 = 80 + (-1) (atomic number goes UP by 1 to 80!).", "panel3WhyAloud": "Why: In beta decay a neutron turns into a proton and an electron, so the mass number stays the same while the proton number increases by one.", "panel3MarkSchemeAloud": "In beta decay, the beta particle has mass zero and charge minus one, so the mercury nucleus has mass number one hundred and ninety-eight and atomic number eighty.", "voiceKeywords": ["zero", "minus one", "one hundred and ninety-eight", "eighty"]}}, {"id": "PHYS-10", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q04.3 & Q04.6", "topicTag": "Half-Life Graph & Medical Implants", "category": "CALC", "marksLost": 3, "stasExamScore": "0 / 3", "svgKey": "HALF_LIFE", "calcTarget": "2.7", "calcAlternates": ["2.6", "2.8"], "calcUnit": "days", "unitChoices": ["days", "kBq", "hours", "%"], "trapChecks": {"5": "GENJUTSU TRAP! You divided the X-axis max time (10 days ÷ 2 = 5 days) just like on your exam! NEVER halve the X-axis! Halve the initial Y-axis activity: 22 kBq ÷ 2 = 11 kBq, then read across to the curve = 2.7 days!", "11": "11 kBq is half the activity on the Y-axis! Now go across to the curve at 11 kBq and read the time on the bottom X-axis = 2.7 days!"}, "question": "Look at Diagram 5 (initial activity = 22 kBq). 1) Determine the half-life of gold-198 in days (2m). 2) Why are gold-198 cancer seeds left permanently inside the patient after treatment (1m)?", "promptSub": "Halve the initial Y-axis activity (22 ÷ 2 = 11 kBq) and read the X-axis time!", "trueSeals": ["Half of initial Y-axis activity: 22 kBq ÷ 2 = 11 kBq -> drop down to X-axis = 2.7 days", "Why left inside patient: Because the short half-life (2.7 days) means activity quickly decays to a safe level, avoiding the risk of a second surgery"], "trapSeals": ["Dividing the 10-day X-axis in half to get 5 days (Stas's exam mistake - 0/2 marks!)", "The seeds are left inside so they can keep irradiating healthy tissue forever"], "manga": {"panel1Trap": "On the exam you saw the X-axis ended at 10 days, divided 10 by 2, and wrote '5 days' (0/2 marks)! Half-life is NOT half of the graph's width!", "panel2Sensei": "Look at the green dashed lines on Diagram 5: Half-life is the time taken for the ACTIVITY (on the vertical Y-axis) to fall by half! 1) Start at t = 0 on the Y-axis: 22 kBq. 2) Divide by 2: 11 kBq. 3) Draw a horizontal line from 11 kBq to the curve, then drop straight down to the X-axis: 2.7 DAYS! And because 2.7 days is a short half-life, the implant quickly becomes harmless so no second surgery is needed.", "panel3WhyAloud": "Why: Half-life is the time it takes for the vertical activity on the y-axis to halve from twenty-two to eleven kilobecquerels.", "panel3MarkSchemeAloud": "Half of twenty-two kilobecquerels is eleven kilobecquerels, which gives a half-life of two point seven days. The implant is not removed because its activity quickly falls to a safe level.", "voiceKeywords": ["eleven", "two point seven days", "half-life", "safe"]}}, {"id": "PHYS-11", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q04.4", "topicTag": "Percentage Decrease Trap", "category": "CALC", "marksLost": 3, "stasExamScore": "1 / 4", "svgKey": "HALF_LIFE", "calcTarget": "73", "calcAlternates": ["72.7", "72.73"], "calcUnit": "%", "unitChoices": ["%", "kBq", "days", "Bq"], "trapChecks": {"27": "GENJUTSU TRAP! 6 ÷ 22 = 27% is the percentage REMAINING! The question asked for PERCENTAGE DECREASE: 100% - 27% = 73%!", "27.3": "GENJUTSU TRAP! 27.3% is what is LEFT after 5 days. Subtract from 100% to find the DECREASE: 100% - 27.3% = 72.7% (73%)!", "16": "16 kBq is the decrease in kBq (22 - 6 = 16). Now divide by initial activity 22 and multiply by 100: (16 ÷ 22) × 100 = 73%!"}, "question": "Using Diagram 5, calculate the PERCENTAGE DECREASE in the activity of the gold-198 source after 5.0 days (at t = 0, activity = 22 kBq; at t = 5.0 days, activity = 6 kBq). (4 marks)", "promptSub": "Read the question carefully: PERCENTAGE DECREASE (how much it dropped, NOT how much is left)!", "trueSeals": ["Step 1: Activity decrease = 22 kBq - 6 kBq = 16 kBq", "Step 2: Percentage decrease = (16 ÷ 22) × 100% = 73% (or 100% - 27% = 73%)"], "trapSeals": ["Stopping at 6 ÷ 22 × 100% = 27% (Stas's exam mistake - cost 3 out of 4 marks!)", "Dividing 22 by 6 to get 366%"], "manga": {"panel1Trap": "You read the graph perfectly (22 and 6) and calculated 6 / 22 = 27% (1/4 marks). But 27% is how much activity is LEFT! Because you didn't subtract 27% from 100%, you lost 3 marks on the final step!", "panel2Sensei": "Whenever a question says PERCENTAGE DECREASE (or percentage change), always use: Decrease = (Initial - Final) / Initial x 100%. Here: (22 - 6) / 22 x 100% = 16 / 22 x 100% = 72.7% -> 73%! Or if you find 6 / 22 = 27% remaining, immediately do 100% - 27% = 73%!", "panel3WhyAloud": "Why: Six divided by twenty-two gives the twenty-seven percent remaining, so we must subtract from one hundred percent to find the seventy-three percent decrease.", "panel3MarkSchemeAloud": "The activity drops from twenty-two to six, which is a decrease of sixteen. Sixteen divided by twenty-two times one hundred gives a percentage decrease of seventy-three percent.", "voiceKeywords": ["sixteen", "twenty-two", "percentage decrease", "seventy-three percent"]}}, {"id": "PHYS-12", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q05.1 & Q05.2", "topicTag": "UK Mains Electricity & Wire Colours", "category": "KEYWORDS", "marksLost": 4, "stasExamScore": "0 / 4", "svgKey": "UK_PLUG", "question": "1) State the frequency and potential difference of UK mains electricity (2m). 2) Name the two wires in a 2-core appliance cable and state their insulation colours (2m).", "promptSub": "Look at Diagram 3 (UK 3-Pin Plug) and select the 3 true UK standards.", "trueSeals": ["UK Mains Potential Difference = 230 V and Frequency = 50 Hz", "LIVE wire = BROWN insulation (right pin, connected to fuse at 230 V)", "NEUTRAL wire = BLUE insulation (left pin, completes circuit at ~0 V); [Earth = Green & Yellow stripes]"], "trapSeals": ["220 V and 60 Hz (Stas's exam mistake - 60 Hz is USA, not UK!)", "Live wire is Red and Neutral wire is Black", "Earth wire carries 230 V during normal operation"], "manga": {"panel1Trap": "You lost all 4 marks in Q05.1-05.2 because you wrote '220 V, 60 Hz' and didn't know the UK wire colours. These 4 facts are pure memory marks on every AQA Physics Paper 1!", "panel2Sensei": "Lock Diagram 3 into your memory right now: 1) UK Mains Supply is ALWAYS 230 Volts and 50 Hertz (230 V, 50 Hz). 2) Memory trick for the plug wires: bLue = Left = Neutral; bRown = Right = Live (230 V through the Fuse); Green & Yellow stripes = Top = Earth safety wire!", "panel3WhyAloud": "Why: Every UK household socket supplies alternating current at two hundred and thirty volts and fifty hertz through a brown live wire and a blue neutral wire.", "panel3MarkSchemeAloud": "UK mains electricity has a potential difference of two hundred and thirty volts and a frequency of fifty hertz. The live wire is brown and the neutral wire is blue.", "voiceKeywords": ["two hundred and thirty volts", "fifty hertz", "live", "brown", "neutral", "blue"]}}, {"id": "PHYS-13", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q05.3", "topicTag": "AC vs DC Potential Difference", "category": "KEYWORDS", "marksLost": 2, "stasExamScore": "0 / 2", "question": "Explain the difference between alternating potential difference (AC) and direct potential difference (DC). (2 marks)", "promptSub": "Select the 2 exact AQA Physics definitions for AC and DC.", "trueSeals": ["Alternating potential difference (AC) constantly CHANGES DIRECTION (switches polarity positive to negative)", "Direct potential difference (DC) acts / flows in ONE DIRECTION ONLY"], "trapSeals": ["AC is unstable and DC is stable (Stas's exam mistake - 0/2 marks!)", "AC only works in batteries while DC comes from mains sockets", "DC constantly reverses direction 50 times per second"], "manga": {"panel1Trap": "You wrote that AC is 'unstable' and DC is 'stable' (0/2 marks). Mains electricity is very stable! Calling alternating current 'unstable' is an instant zero in GCSE Physics.", "panel2Sensei": "The word 'Alternating' simply means reversing direction! In AC (mains supply), the potential difference and current CONSTANTLY CHANGE DIRECTION back and forth (50 times a second in the UK). In DC (cells and batteries), the potential difference and current act in ONE DIRECTION ONLY!", "panel3WhyAloud": "Why: Alternating means switching back and forth, whereas direct means moving steadily in one single direction.", "panel3MarkSchemeAloud": "Alternating potential difference constantly changes direction, whereas direct potential difference acts in one direction only.", "voiceKeywords": ["alternating", "changes direction", "direct", "one direction"]}}, {"id": "PHYS-14", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q05.4", "topicTag": "Power & Energy Transfer", "category": "KEYWORDS", "marksLost": 2, "stasExamScore": "0 / 2", "question": "Explain why a laptop battery takes longer to recharge when the student is using the laptop at the same time. (2 marks)", "promptSub": "Select the 2 Physics power-split seals (avoid everyday slang!).", "trueSeals": ["Part of the total input power from the charger is used to run the laptop components", "So LESS POWER (less energy per second) is transferred to the chemical energy store of the battery"], "trapSeals": ["Because the student drains the battery while charging (Stas's everyday phrasing - 0/2 marks!)", "Because using the keyboard increases the resistance of the mains plug", "Because the charger stops working when the screen is on"], "manga": {"panel1Trap": "You wrote 'student drains the battery' (0/2 marks). When a 97 W charger is plugged in, the battery is charging up, NOT draining! Everyday slang cost you 2 marks.", "panel2Sensei": "Actually, you solved the maths for this exact situation in the very next question (Q05.5)! The charger supplies 97 W total. When the laptop is switched on, 72 W is used to run the laptop, leaving only 25 W to charge the battery! In words: part of the charger's input power is used to operate the laptop, so LESS POWER (less energy per second) is transferred to the battery.", "panel3WhyAloud": "Why: The charger's fixed input power is split between running the laptop and charging the battery, so energy enters the battery at a slower rate.", "panel3MarkSchemeAloud": "Part of the input power from the charger is used to run the laptop, so less power is transferred to recharge the battery.", "voiceKeywords": ["input power", "run the laptop", "less power", "transferred", "battery"]}}, {"id": "PHYS-15", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q05.5", "topicTag": "Unit Trap: kJ to J & Seconds to Hours (6-Mark)", "category": "CALC", "marksLost": 3, "stasExamScore": "3 / 6", "calcTarget": "2.5", "calcAlternates": ["2.50"], "calcUnit": "hours", "unitChoices": ["hours", "seconds", "kJ", "W"], "trapChecks": {"9": "GENJUTSU UNIT TRAP! That's the exact '9 hours' you wrote on the exam! 225 kJ = 225,000 J (so t = 225,000 ÷ 25 = 9000 seconds). Now divide 9000 seconds by 3600 seconds per hour = 2.5 hours!", "9000": "Almost there! 9000 is the time in SECONDS (225,000 J ÷ 25 W). The answer line asks for HOURS! Divide 9000 by 3600 (60 × 60) = 2.5 hours!", "150": "150 is minutes (9000 ÷ 60)! Divide by 60 one more time to get HOURS: 150 ÷ 60 = 2.5 hours!"}, "question": "A laptop charger supplies 97 W total power. The laptop uses V = 15 V and I = 4.8 A to operate. The remaining power charges the battery, which needs 225 kJ of energy. Calculate the time taken to recharge the battery in HOURS. (6 marks)", "promptSub": "Your physics logic on the exam was brilliant (72 W -> 25 W)! Now fix the two unit conversions: 225 kJ -> 225,000 J, and seconds -> hours (÷ 3600)!", "trueSeals": ["Step 1 & 2: P_laptop = 15 × 4.8 = 72 W  =>  P_charging = 97 W - 72 W = 25 W (Stas nailed this!)", "Step 3 (kJ to J): E = 225 kJ = 225,000 J  =>  Time = E ÷ P = 225,000 ÷ 25 = 9000 seconds", "Step 4 (Seconds to Hours): 9000 s ÷ 3600 = 2.5 hours"], "trapSeals": ["Dividing 225 by 25 to get 9 hours without converting kJ to J or seconds to hours (Stas's exam mistake - lost 3 marks!)"], "manga": {"panel1Trap": "Your multi-step physics brain in Q05.5 was top-tier: you found P = 15 x 4.8 = 72 W, subtracted 97 - 72 = 25 W, and divided E / P (3/6 marks). You lost 3 marks PURELY because you didn't convert 225 kJ into 225,000 J and seconds into hours!", "panel2Sensei": "In Physics formulas, Energy E must ALWAYS be in Joules (J) and Time t always comes out in SECONDS (s)! 1) 225 kJ = 225,000 J. 2) t = E / P = 225,000 / 25 = 9000 seconds. 3) Look at the answer line unit: 'hours'! Since 1 hour = 60 x 60 = 3600 seconds, divide 9000 by 3600 = 2.5 HOURS!", "panel3WhyAloud": "Why: Watts mean joules per second, so kilojoules must be multiplied by one thousand to give seconds, then divided by three thousand six hundred to give hours.", "panel3MarkSchemeAloud": "Two hundred and twenty-five kilojoules is two hundred and twenty-five thousand joules. Divided by twenty-five watts gives nine thousand seconds, which divided by three thousand six hundred equals two point five hours.", "voiceKeywords": ["two hundred and twenty-five thousand", "nine thousand seconds", "three thousand six hundred", "two point five hours"]}}, {"id": "PHYS-16", "subject": "PHYS", "subjectTitle": "Physics 1H", "senseiName": "Kakashi Hatake (Copy Ninja)", "qRef": "Q06.1, Q06.2, Q06.4", "topicTag": "Density Cube & Gravitational Energy", "category": "CALC", "marksLost": 5, "stasExamScore": "3 / 8", "calcTarget": "525000", "calcAlternates": ["5.25e5"], "calcUnit": "kg", "unitChoices": ["kg", "g", "m^3", "N"], "trapChecks": {"525": "STOP! GENJUTSU TRAP! That is the exact mistake you made on the exam! 125 m^3 × 4200 kg/m^3 = 525,000 kg (it is ALREADY in kg - do NOT divide by 1000!)"}, "question": "1) A gravity storage block is a cube of side 5.0 m with density 4200 kg/m^3. Calculate its mass in kg (4m). 2) Why is the block made from high-density material (2m)? 3) How can the system store the same gravitational potential energy in less time (2m)?", "promptSub": "Calculate V = 5^3 = 125 m^3, then m = ρ × V = 4200 × 125. Do NOT divide your kg answer by 1000!", "trueSeals": ["Mass calculation: V = 5^3 = 125 m^3  =>  m = 4200 × 125 = 525,000 kg (already in kg!)", "Why high density: Gives a GREATER MASS for the same volume, storing MORE gravitational potential energy (Ep = mgh)", "Store energy in less time: Use a MORE POWERFUL motor to lift the block faster"], "trapSeals": ["Dividing 525,000 kg by 1000 at the end to write 525 kg (Stas's exam mistake!)", "Making the block out of low-density plastic so it holds more energy"], "manga": {"panel1Trap": "Look at your exam paper for Q06.1: you wrote 5^3 = 125 and 125 x 4200 = 525,000 (3/4 marks). And then on the very last line, for no reason at all, you divided 525,000 by 1000 and wrote '525 kg'! A 5-metre solid rock cube cannot weigh 525 kg!", "panel2Sensei": "Check your units before dividing by 1000! Volume is in m^3 and density is in kg/m^3, so multiplying them ALREADY gives KILOGRAMS (525,000 kg)! For Q06.2: high density means GREATER MASS in the same volume, and since Ep = mgh, greater mass stores MORE GRAVITATIONAL POTENTIAL ENERGY. For Q06.4: to transfer the same energy in less time (P = E / t), use a MORE POWERFUL MOTOR!", "panel3WhyAloud": "Why: Multiplying cubic metres by kilograms per cubic metre directly gives kilograms, and higher mass stores more gravitational potential energy.", "panel3MarkSchemeAloud": "The volume is one hundred and twenty-five cubic metres, so the mass is five hundred and twenty-five thousand kilograms. High density gives a greater mass to store more gravitational potential energy, and a more powerful motor stores energy in less time.", "voiceKeywords": ["five hundred and twenty-five thousand", "greater mass", "gravitational potential energy", "more powerful motor"]}}, {"id": "CHEM-01", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q01.4 & Q01.2", "topicTag": "Concentration in g/dm³ & Graphs", "category": "CALC", "marksLost": 2, "stasExamScore": "1 / 3", "calcTarget": "220", "calcAlternates": ["220.0"], "calcUnit": "g/dm³", "unitChoices": ["g/dm³", "g/cm³", "mol/dm³", "dm³"], "trapChecks": {"0.1375": "STOP! GENJUTSU TRAP! You multiplied 5.5 × 0.025 just like on your exam! Look at the unit 'g/dm³' (grams DIVIDED by dm³): C = 5.5 ÷ 0.025 = 220 g/dm³!", "0.14": "STOP! You multiplied mass by volume! Concentration is mass DIVIDED by volume: 5.5 ÷ 0.025 = 220 g/dm³!", "0.22": "TRAP! Did you forget to convert 25 cm³ into dm³? 25 ÷ 1000 = 0.025 dm³, then 5.5 ÷ 0.025 = 220 g/dm³!"}, "question": "Calculate the concentration in g/dm³ of a solution that contains 5.5 g of potassium chloride dissolved in 25 cm³ of solution. (3 marks)", "promptSub": "Convert 25 cm³ to dm³ (÷ 1000 = 0.025 dm³), then DIVIDE mass by volume (C = m ÷ V)!", "trueSeals": ["Step 1: Convert volume from cm³ to dm³: V = 25 ÷ 1000 = 0.025 dm³", "Step 2: Divide mass by volume: Concentration = 5.5 g ÷ 0.025 dm³ = 220 g/dm³", "Bonus Graph Rule (Q01.2): After plotting points on a graph, always draw a smooth LINE OF BEST FIT"], "trapSeals": ["Multiplying 5.5 × 0.025 = 0.1375 g/dm³ instead of dividing (Stas's exam mistake - lost 2 marks!)", "Dividing 25 by 5.5 without converting cm³ to dm³"], "manga": {"panel1Trap": "In Q01.4 you correctly converted 25 cm³ into 0.025 dm³ (1/3 marks). Then you MULTIPLIED 5.5 x 0.025 instead of dividing! Also in Q01.2, your teacher noted you plotted all 6 points perfectly but forgot to draw the line of best fit!", "panel2Sensei": "The unit on the answer line gives away the formula! Look at 'g / dm³' - the slash '/' literally means DIVIDE grams by dm³! 1) V = 25 / 1000 = 0.025 dm³. 2) C = m / V = 5.5 / 0.025 = 220 g/dm³!", "panel3WhyAloud": "Why: The unit grams per cubic decimetre tells us to divide mass in grams by volume in cubic decimetres.", "panel3MarkSchemeAloud": "Twenty-five cubic centimetres divided by one thousand is zero point zero two five cubic decimetres. Concentration equals mass divided by volume, giving two hundred and twenty grams per cubic decimetre.", "voiceKeywords": ["zero point zero two five", "concentration", "mass divided by volume", "two hundred and twenty"]}}, {"id": "CHEM-02", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q02.1", "topicTag": "Exothermic Reaction Definition", "category": "KEYWORDS", "marksLost": 1, "stasExamScore": "0 / 1", "question": "What is meant by an EXOTHERMIC reaction? (1 mark)", "promptSub": "Select the 1 strict AQA Chemistry definition. Never confuse energy with temperature!", "trueSeals": ["A reaction that transfers THERMAL ENERGY (HEAT) to the surroundings (causing the temperature of the surroundings to increase)"], "trapSeals": ["When the temperature is given off (Stas's exact exam mistake - 0/1 marks!)", "A reaction that absorbs heat energy from the surroundings so it gets colder", "A reaction that creates new atoms of fire"], "manga": {"panel1Trap": "You wrote: 'When the temperature is given off' (0/1). In AQA Chemistry Mark Schemes, 'temperature is given off/released' is explicitly listed in the 'DO NOT ACCEPT' column!", "panel2Sensei": "Temperature is just a thermometer reading in °C - it cannot travel or be given off! What actually moves is THERMAL ENERGY (or HEAT). Therefore, an EXOTHERMIC reaction is a reaction that TRANSFERS THERMAL ENERGY (HEAT) TO THE SURROUNDINGS!", "panel3WhyAloud": "Why: Temperature is only a measurement on a thermometer, whereas thermal energy is what actually transfers to the surroundings.", "panel3MarkSchemeAloud": "An exothermic reaction is a reaction that transfers thermal energy to the surroundings.", "voiceKeywords": ["exothermic", "transfers", "thermal energy", "surroundings"]}}, {"id": "CHEM-03", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q02.2", "topicTag": "Percentage by Mass in Ca(OH)₂", "category": "CALC", "marksLost": 2, "stasExamScore": "1 / 3", "calcTarget": "43.2", "calcAlternates": ["43", "43.24"], "calcUnit": "%", "unitChoices": ["%", "g", "mol", "g/dm³"], "trapChecks": {"32": "32 is the mass of the 2 Oxygen atoms (2 × 16 = 32). Now divide 32 by total Mr (74) and multiply by 100 = 43.2%!", "21.6": "TRAP! Remember the little 2 outside the bracket in Ca(OH)₂ doubles the Oxygen! Mass of O = 2 × 16 = 32. Then (32 ÷ 74) × 100 = 43.2%!"}, "question": "Calculate the percentage by mass of oxygen in calcium hydroxide, Ca(OH)₂. (Ar of O = 16, relative formula mass Mr of Ca(OH)₂ = 74). (3 marks)", "promptSub": "On the exam you wrote '32/74' and stopped! Finish the calculation on your calculator!", "trueSeals": ["Step 1: Total mass of 2 oxygen atoms in Ca(OH)₂ = 2 × 16 = 32", "Step 2: Percentage by mass = (32 ÷ 74) × 100% = 43.2% (always write the final number on the answer line!)"], "trapSeals": ["Writing the fraction '32/74' in rough working and leaving the final percentage answer line completely blank (Stas's exam mistake - lost 2 marks!)", "Using only 1 oxygen atom: (16 ÷ 74) × 100% = 21.6%"], "manga": {"panel1Trap": "Look at your Chemistry paper for Q02.2: you correctly worked out 2 x 16 = 32 and wrote '32/74' (1/3 marks). And then you didn't type 32 ÷ 74 x 100 into your calculator and left the answer line BLANK! You threw away 2 marks when you were 3 seconds from the finish line!", "panel2Sensei": "Never leave a fraction unfinished! In Ca(OH)₂, the subscript 2 outside the bracket multiplies everything inside: 2 Oxygen atoms = 2 x 16 = 32. Divide by the total Mr (74) and multiply by 100: (32 / 74) x 100% = 43.2%!", "panel3WhyAloud": "Why: Two oxygen atoms weigh thirty-two in total, and dividing thirty-two by seventy-four times one hundred gives forty-three point two percent.", "panel3MarkSchemeAloud": "Two oxygen atoms have a mass of thirty-two. Thirty-two divided by seventy-four times one hundred equals forty-three point two percent.", "voiceKeywords": ["thirty-two", "seventy-four", "forty-three point two percent"]}}, {"id": "CHEM-04", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q02.3", "topicTag": "Temperature Change Practical (6-Mark)", "category": "SIXMARK", "marksLost": 4, "stasExamScore": "2 / 6", "question": "Plan an investigation to show how the mass of calcium oxide (CaO) added to water affects the temperature change of the water. (6 marks)", "promptSub": "6-MARK REQUIRED PRACTICAL: Select all 5 steps (Control Variable + Independent Variable + Dependent Variable + Apparatus).", "trueSeals": ["1. Measure a FIXED VOLUME of water (e.g. 25 cm³ or 50 cm³) using a MEASURING CYLINDER (control variable)", "2. Pour into a POLYSTYRENE CUP with a lid inside a beaker and record INITIAL TEMPERATURE with a THERMOMETER", "3. Weigh a known mass of CaO (e.g. 1.0 g) using a TOP-PAN BALANCE, add to water, and STIR", "4. Record the MAXIMUM (highest) temperature reached and calculate the temperature change (ΔT)", "5. Repeat using at least 5 DIFFERENT MASSES of CaO (e.g. 1g, 2g, 3g, 4g, 5g) with fresh water each time"], "trapSeals": ["Only mentioning a polystyrene cup and thermometer without stating fixed water volume, balance, or different masses of CaO (Stas's 2/6 answer!)", "Heat the polystyrene cup over a roaring Bunsen burner flame", "Change both the volume of water and the mass of calcium oxide at the same time"], "manga": {"panel1Trap": "You scored Level 1 (2/6 marks) for naming the insulated polystyrene cup with a lid and a thermometer. To get 6/6, you must state the quantities and apparatus for all three variables!", "panel2Sensei": "Use this 5-point checklist for ANY temperature change practical: 1) Control variable: measure a FIXED VOLUME of water with a MEASURING CYLINDER. 2) Insulate in a POLYSTYRENE CUP with a lid and measure INITIAL TEMPERATURE with a THERMOMETER. 3) Independent variable: weigh a set mass of solid (CaO) on a BALANCE. 4) STIR and record the MAXIMUM TEMPERATURE to find ΔT. 5) Repeat with at least 5 DIFFERENT MASSES of CaO!", "panel3WhyAloud": "Why: A valid investigation keeps the water volume constant while varying the mass of calcium oxide weighed on a balance.", "panel3MarkSchemeAloud": "Measure a fixed volume of water with a measuring cylinder into a polystyrene cup with a lid. Record the initial temperature with a thermometer, weigh different masses of calcium oxide on a balance, stir, and record the maximum temperature change.", "voiceKeywords": ["fixed volume", "measuring cylinder", "polystyrene cup", "different masses", "balance"]}}, {"id": "CHEM-05", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q03.1", "topicTag": "Alpha Scattering Experiment", "category": "KEYWORDS", "marksLost": 1, "stasExamScore": "1 / 2", "question": "Which TWO conclusions were made directly from Rutherford's alpha particle scattering experiment (shooting alpha particles at thin gold foil)? (2 marks)", "promptSub": "Select the 2 conclusions proven by alpha scattering (remember when neutrons were discovered!).", "trueSeals": ["The nucleus is POSITIVELY CHARGED (because some positive alpha particles were deflected/repelled)", "Most of the MASS of the atom is concentrated in a tiny central NUCLEUS (while most of the atom is empty space)"], "trapSeals": ["Isotopes have different numbers of neutrons (Stas's exam mistake - Chadwick discovered neutrons 20 years later!)", "Electrons orbit the nucleus at specific fixed distances (that was Bohr's later model)", "The atom is a solid positively charged ball with electrons stuck in it (Plum Pudding model)"], "manga": {"panel1Trap": "You got 1 mark for the charged nucleus, but your second tick was about neutrons in isotopes! Neutrons have zero charge and were discovered much later by James Chadwick (1932), not by Rutherford's gold foil experiment!", "panel2Sensei": "What happened in the gold foil experiment? 1) Most alpha particles went straight through -> most of the atom is EMPTY SPACE. 2) A few bounced back -> almost all the MASS of the atom is concentrated in a tiny central NUCLEUS. 3) Positive alpha particles were repelled -> the nucleus is POSITIVELY CHARGED!", "panel3WhyAloud": "Why: Alpha particles only bounced back from a tiny, heavy, positively charged centre, proving the mass is concentrated in the nucleus.", "panel3MarkSchemeAloud": "The alpha scattering experiment proved that the nucleus is positively charged and that most of the mass of the atom is concentrated in the nucleus.", "voiceKeywords": ["positively charged", "mass", "concentrated", "nucleus"]}}, {"id": "CHEM-06", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q03.4", "topicTag": "Boiling Point of Halogens (Group 7)", "category": "KEYWORDS", "marksLost": 3, "stasExamScore": "0 / 3", "question": "Explain why the boiling point of the halogens (Group 7) INCREASES as you go down the group (from fluorine to iodine). (3 marks)", "promptSub": "Select the 3-step physical bonding template (do NOT talk about chemical reactivity!).", "trueSeals": ["1. Going down Group 7, the molecules become LARGER (higher relative molecular mass)", "2. Therefore, the INTERMOLECULAR FORCES between the molecules become STRONGER", "3. So MORE THERMAL ENERGY is needed to overcome these intermolecular forces during boiling"], "trapSeals": ["Explaining boiling point using chemical reactivity and outer shell electrons (Stas's exam mistake - 0/3 marks!)", "Strong covalent bonds inside the halogen molecules are broken when boiling (NEVER say covalent bonds break on boiling!)", "Intermolecular forces get weaker down the group"], "manga": {"panel1Trap": "You started writing about reactivity and outer electrons (0/3 marks). Boiling is a physical state change of simple molecules, NOT a chemical reaction!", "panel2Sensei": "Memorise this 3-mark template for ANY simple molecular substance (like Group 7 halogens or Group 0 noble gases): Going down the group: 1) The molecules get LARGER (more electrons / higher Mr). 2) Therefore, the INTERMOLECULAR FORCES between molecules get STRONGER. 3) Therefore, MORE ENERGY is required to overcome these intermolecular forces! (Never say covalent bonds break during boiling!)", "panel3WhyAloud": "Why: Larger halogen molecules have stronger intermolecular forces between them, requiring more heat energy to separate them into a gas.", "panel3MarkSchemeAloud": "Going down group seven, the molecules become larger, so the intermolecular forces become stronger, and more energy is needed to overcome them.", "voiceKeywords": ["molecules", "larger", "intermolecular forces", "stronger", "more energy"]}}, {"id": "CHEM-07", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q03.6", "topicTag": "Halogen Displacement Equations", "category": "KEYWORDS", "marksLost": 1, "stasExamScore": "0 / 1", "question": "Complete the word equation for the halogen displacement reaction:  chlorine + sodium bromide ---> ?  (1 mark)", "promptSub": "More reactive chlorine displaces less reactive bromine from its salt!", "trueSeals": ["SODIUM CHLORIDE + BROMINE  (Cl₂ + 2NaBr -> 2NaCl + Br₂)"], "trapSeals": ["chlorine bromide + sodium (Stas's exam mistake - a halogen never kicks out the metal sodium!)", "sodium + chlorine + bromine", "no reaction occurs"], "manga": {"panel1Trap": "You wrote 'chlorine bromide + sodium' (0/1). Chlorine is a non-metal halogen - it replaces the other halogen (bromide), NOT the sodium metal!", "panel2Sensei": "In Group 7 displacement, the more reactive halogen (Chlorine, higher up Group 7) steals the metal partner (Sodium) from the less reactive halide (Bromide). So: Chlorine + Sodium Bromide ---> SODIUM CHLORIDE + BROMINE!", "panel3WhyAloud": "Why: More reactive chlorine displaces less reactive bromine to partner with the sodium metal.", "panel3MarkSchemeAloud": "Chlorine plus sodium bromide reacts to form sodium chloride and bromine.", "voiceKeywords": ["sodium chloride", "bromine"]}}, {"id": "CHEM-08", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q03.7", "topicTag": "Group 7 Reactivity Trend (3-Mark)", "category": "KEYWORDS", "marksLost": 3, "stasExamScore": "0 / 3 (SKIPPED!)", "question": "Explain why the chemical reactivity of the halogens DECREASES going down Group 7. (3 marks)", "promptSub": "Select all 3 atomic structure steps explaining why it gets harder to gain 1 electron down Group 7.", "trueSeals": ["1. Going down Group 7, atoms get LARGER with MORE ELECTRON SHELLS (outer shell is further from the nucleus)", "2. Increased electron SHIELDING means WEAKER electrostatic attraction from the positive nucleus to the outer shell", "3. Therefore, it is HARDER for the atom to attract / gain 1 electron into its outer shell"], "trapSeals": ["Skipping the question completely (Stas's exam mistake - lost 3 classic marks!)", "Halogens react by losing 1 outer electron, which gets harder down the group (that's Group 1, not Group 7!)", "Atoms have fewer electron shells going down the group"], "manga": {"panel1Trap": "You left Q03.7 completely blank (0/3 marks)! Explaining Group 1 or Group 7 reactivity is one of the most guaranteed 3-4 mark questions in GCSE Chemistry!", "panel2Sensei": "How do Group 7 halogens react? They have 7 outer electrons, so they need to GAIN 1 ELECTRON. Why does gaining 1 electron get harder down the group? 1) Atoms have MORE SHELLS, so the outer shell is FURTHER from the positive nucleus and has more inner-shell SHIELDING. 2) This causes WEAKER ATTRACTION from thepositive nucleus. 3) Therefore, it is HARDER TO GAIN 1 ELECTRON!", "panel3WhyAloud": "Why: More electron shells increase distance and shielding from the positive nucleus, making it harder to attract an incoming electron.", "panel3MarkSchemeAloud": "Going down group seven, atoms have more electron shells and more shielding, so there is weaker attraction from the nucleus, making it harder to gain one electron.", "voiceKeywords": ["more electron shells", "shielding", "weaker attraction", "nucleus", "gain one electron"]}}, {"id": "CHEM-09", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q04.2", "topicTag": "Electrolysis of Aluminium (Cryolite)", "category": "KEYWORDS", "marksLost": 2, "stasExamScore": "0 / 2 (SKIPPED!)", "question": "In the industrial extraction of aluminium by electrolysis, why is aluminium oxide dissolved in molten CRYOLITE? (2 marks)", "promptSub": "Mr. Hales wrote 'Metal Extraction + Electrolysis' on your front cover! Select the 2 marks for cryolite.", "trueSeals": ["1. Cryolite LOWERS THE MELTING POINT of the aluminium oxide mixture (from ~2050°C to ~950°C)", "2. This reduces the amount of thermal ENERGY required (making the process cheaper)"], "trapSeals": ["Leaving the question blank (Stas's exam mistake - 0/2 marks!)", "Cryolite acts as a catalyst to make aluminium conduct electricity as a solid", "Cryolite increases the melting point so the carbon anodes do not burn"], "manga": {"panel1Trap": "Your chemistry teacher Mr. Hales highlighted Question 4 (1/11 marks) on your front cover as your #1 priority! You left Q04.2 (the role of cryolite) completely blank.", "panel2Sensei": "Pure aluminium oxide (Al₂O₃) melts at over 2050°C - keeping a factory furnace that hot costs a fortune! By dissolving Al₂O₃ in molten CRYOLITE, we: 1) LOWER THE MELTING POINT of the mixture (down to ~950°C), which 2) SAVES ENERGY (reduces fuel/electricity costs)!", "panel3WhyAloud": "Why: Pure aluminium oxide melts at an extremely high temperature, so dissolving it in cryolite lowers the melting point and saves energy.", "panel3MarkSchemeAloud": "Cryolite lowers the melting point of the mixture, which reduces the amount of energy needed.", "voiceKeywords": ["cryolite", "lowers the melting point", "reduces", "energy"]}}, {"id": "CHEM-10", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q04.3", "topicTag": "Anode Half-Equation (2O²⁻ -> O₂ + 4e⁻)", "category": "KEYWORDS", "marksLost": 2, "stasExamScore": "0 / 2", "question": "In the electrolysis of aluminium oxide, oxide ions (O²⁻) move to the positive anode and form oxygen gas (O₂). Write the balanced half-equation at the anode. (2 marks)", "promptSub": "Select the 2 true steps for balancing the oxide anode half-equation.", "trueSeals": ["Correct species: Oxide ions (O²⁻) turn into diatomic oxygen gas (O₂) and electrons (e⁻)", "Balanced half-equation:  2O²⁻  --->  O₂ + 4e⁻   (or 2O²⁻ - 4e⁻ ---> O₂)"], "trapSeals": ["AlCH₄ ---> 2AlH + O₂ (Stas's invented equation on the exam - 0/2 marks!)", "O²⁻ + 2e⁻ ---> O₂ (wrong: negative ions LOSE electrons at the positive anode, and oxygen needs 2 O²⁻ ions!)", "Al³⁺ + 3e⁻ ---> Al (that happens at the negative cathode, not the positive anode!)"], "manga": {"panel1Trap": "You invented 'AlCH₄ -> 2AlH + O₂' (0/2 marks). Where did hydrogen and methane come from?! The question literally told you: 'oxide ions (O²⁻) form oxygen (O₂)'!", "panel2Sensei": "Read the question stem carefully - it gives you the formulas! 1) On the left: oxide ion O²⁻. On the right: oxygen gas O₂. 2) To make one O₂ molecule, you need TWO oxide ions: 2O²⁻. 3) Each O²⁻ ion has 2 extra negative electrons, so two O²⁻ ions lose 4 electrons in total: 2O²⁻ ---> O₂ + 4e⁻! (OIL RIG: Oxidation Is Loss of electrons at the Anode).", "panel3WhyAloud": "Why: Two negatively charged oxide ions must lose four electrons in total at the positive anode to form one neutral oxygen molecule.", "panel3MarkSchemeAloud": "At the positive anode, two oxide ions form one oxygen molecule plus four electrons: two O two minus goes to O two plus four e minus.", "voiceKeywords": ["two oxide ions", "oxygen", "four electrons"]}}, {"id": "CHEM-11", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q04.4, Q04.5, Q04.6", "topicTag": "Reduction by Oxygen & Metal Extraction Cost", "category": "KEYWORDS", "marksLost": 3, "stasExamScore": "0 / 3", "question": "Chromium is extracted by reacting chromium oxide with aluminium: Cr₂O₃ + 2Al ---> Al₂O₃ + 2Cr. 1) How does the equation show Cr₂O₃ is REDUCED (1m)? 2) Why does Al cost more to extract than Fe (1m)? 3) Why does Cr cost more than Al (1m)?", "promptSub": "Select all 3 true seals covering reduction and extraction economics.", "trueSeals": ["Cr₂O₃ is REDUCED because it LOSES OXYGEN (forming Cr metal)", "Aluminium costs more than iron because Al is extracted by ELECTROLYSIS, which uses huge amounts of electricity", "Chromium costs even more than aluminium because extracting Cr uses expensive pre-extracted ALUMINIUM as the reactant"], "trapSeals": ["Aluminium is reduced because it gains oxygen (Stas's exam mistake - gaining oxygen is OXIDATION!)", "Iron is more expensive than aluminium because iron uses carbon", "Chromium is found pure in the ground like gold"], "manga": {"panel1Trap": "In Q04.4 you wrote that Aluminium is reduced (0/1). Look at the equation: Al starts with no oxygen and ends up as Al₂O₃ (it GAINED oxygen = OXIDISED)! Cr₂O₃ LOST oxygen = REDUCED!", "panel2Sensei": "Three simple rules: 1) In terms of oxygen: OXIDATION = gaining oxygen; REDUCTION = LOSING OXYGEN. Cr₂O₃ loses oxygen to become Cr, so Cr₂O₃ is reduced. 2) Why is Al pricier than Fe? Iron is heated with cheap carbon, whereas Aluminium requires ELECTROLYSIS (huge electrical energy cost). 3) Why is Cr pricier than Al? Because you have to use already-made expensive ALUMINIUM to displace the chromium!", "panel3WhyAloud": "Why: Reduction in terms of oxygen means losing oxygen, and electrolysis of aluminium uses large amounts of expensive electricity.", "panel3MarkSchemeAloud": "Chromium oxide is reduced because it loses oxygen. Aluminium costs more than iron because electrolysis uses a lot of electricity, and chromium uses expensive aluminium as a reactant.", "voiceKeywords": ["loses oxygen", "electrolysis", "electricity", "aluminium"]}}, {"id": "CHEM-12", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q04.7", "topicTag": "Why Alloys are Harder than Pure Metals (3-Mark)", "category": "KEYWORDS", "marksLost": 3, "stasExamScore": "0 / 3 (SKIPPED!)", "question": "Explain in terms of structure why aluminium alloys are harder than pure aluminium metal. (3 marks)", "promptSub": "Select the 3 classic Mark Scheme seals for Alloy hardness!", "trueSeals": ["1. Alloys contain atoms of DIFFERENT ELEMENTS which have DIFFERENT SIZES", "2. These different-sized atoms DISTORT / DISRUPT the regular layers of metal atoms", "3. Making it much HARDER FOR THE LAYERS TO SLIDE over each other when a force is applied"], "trapSeals": ["Skipping the question completely (Stas's exam mistake - lost 3 textbook marks!)", "Alloys form giant covalent bonds between the metal atoms", "Pure metals have no delocalised electrons whereas alloys do"], "manga": {"panel1Trap": "You skipped Q04.7 completely (0/3 marks)! 'Why are alloys harder than pure metals?' is one of the most famous 3-mark questions in AQA Chemistry!", "panel2Sensei": "Picture a box of identical marbles (pure metal): the neat flat rows SLIDE over each other easily, making pure metal soft. Now drop a few giant golf balls into the box (an ALLOY): 1) Added atoms are of DIFFERENT SIZES. 2) They DISTORT (disrupt) the regular layers of atoms. 3) Therefore, it is much HARDER FOR THE LAYERS TO SLIDE over each other!", "panel3WhyAloud": "Why: Mixing in atoms of a different size jams the neat metal layers so they cannot slide past one another easily.", "panel3MarkSchemeAloud": "Alloys contain atoms of different sizes, which distort the regular layers of metal atoms, making it harder for the layers to slide over each other.", "voiceKeywords": ["different sizes", "distort", "layers", "slide"]}}, {"id": "CHEM-13", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q05.2 & Q05.4", "topicTag": "Strong vs Weak Acids & pH Factor of 10", "category": "KEYWORDS", "marksLost": 3, "stasExamScore": "0 / 3", "question": "1) At pH 2.5, the H⁺ ion concentration is 3.16 × 10⁻³ mol/dm³. What is the H⁺ concentration at pH 3.5 (1m)? 2) Explain why a weak acid has a higher pH than a strong acid of the same concentration (2m).", "promptSub": "Mr. Hales wrote 'Strong + weak acids' on your cover! Select all 3 true seals.", "trueSeals": ["When pH increases by +1 unit (from 2.5 to 3.5), [H⁺] decreases by a factor of 10 -> 3.16 × 10⁻⁴ mol/dm³", "A weak acid only PARTIALLY IONISES (dissociates) in aqueous solution (whereas a strong acid completely ionises)", "Therefore, the weak acid produces a LOWER concentration of H⁺ ions in solution"], "trapSeals": ["A weak acid has more water added to it than a strong acid (confusing 'weak' with 'dilute'!)", "Increasing pH by 1 increases H⁺ concentration by 10 to 3.16 × 10⁻²", "Weak acids do not contain any hydrogen atoms"], "manga": {"panel1Trap": "Mr. Hales wrote 'Strong + weak acids' on your front cover because you scored 0/3 here! Never confuse 'weak vs strong' with 'dilute vs concentrated'!", "panel2Sensei": "Two golden rules of Acids & pH (Higher Tier): 1) Every +1 step up the pH scale means the H⁺ ion concentration DECREASES by a factor of 10! So going from pH 2.5 to pH 3.5 divides [H⁺] by 10: 3.16 x 10⁻³ becomes 3.16 x 10⁻⁴ mol/dm³. 2) Strong acids COMPLETELY IONISE in water, whereas weak acids only PARTIALLY IONISE in water, releasing a lower concentration of H⁺ ions!", "panel3WhyAloud": "Why: Each unit increase in pH divides hydrogen ion concentration by ten, and weak acids only partially ionise in water.", "panel3MarkSchemeAloud": "At pH three point five the concentration is three point one six times ten to the minus four. A weak acid only partially ionises in water, producing a lower concentration of hydrogen ions.", "voiceKeywords": ["ten to the minus four", "partially ionises", "lower concentration", "hydrogen ions"]}}, {"id": "CHEM-14", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q05.3", "topicTag": "Covalent Dot-and-Cross Diagram (HOCl)", "category": "KEYWORDS", "marksLost": 2, "stasExamScore": "0 / 2", "question": "In a dot-and-cross diagram for hypochlorous acid, H-O-Cl (H is in Group 1, O is in Group 6, Cl is in Group 7), how are the outer shell electrons arranged? (2 marks)", "promptSub": "Count outer electrons carefully so Oxygen and Chlorine both reach a full outer shell of 8!", "trueSeals": ["Bonding pairs: 1 shared pair of electrons between H and O, and 1 shared pair between O and Cl", "Lone (non-bonding) electrons: 4 non-bonding electrons (2 lone pairs) on Oxygen, and 6 non-bonding electrons (3 lone pairs) on Chlorine"], "trapSeals": ["Putting 4 electrons in each overlap and leaving wrong lone electrons (Stas's exam mistake - 0/2 marks)", "Transferring electrons with square brackets and charges (that is ionic bonding, not covalent!)"], "manga": {"panel1Trap": "You drew extra electrons inside the overlaps (0/2 marks). Whenever you finish a covalent dot-and-cross diagram, ALWAYS count the total outer electrons for each atom!", "panel2Sensei": "Here is the foolproof counting check for H-O-Cl: 1) Hydrogen starts with 1 outer electron (needs 1 more -> shares 1 pair with O). 2) Chlorine starts with 7 outer electrons (needs 1 more -> shares 1 pair with O, leaving 6 unshared electrons on Cl). 3) Oxygen starts with 6 outer electrons (needs 2 more -> shares 1 pair with H and 1 pair with Cl, leaving 6 - 2 = 4 unshared electrons on O)!", "panel3WhyAloud": "Why: Oxygen has six outer electrons and shares two, leaving four non-bonding electrons, while chlorine has seven and shares one, leaving six.", "panel3MarkSchemeAloud": "Oxygen shares one bonding pair with hydrogen and one bonding pair with chlorine, leaving four non-bonding electrons on oxygen and six non-bonding electrons on chlorine.", "voiceKeywords": ["bonding pair", "four", "oxygen", "six", "chlorine"]}}, {"id": "CHEM-15", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q05.5", "topicTag": "Skipped Calculation: Bond Energies", "category": "CALC", "marksLost": 3, "stasExamScore": "0 / 3 (SKIPPED!)", "calcTarget": "-122", "calcAlternates": ["122"], "calcUnit": "kJ/mol", "unitChoices": ["kJ/mol", "g/dm³", "°C", "mol"], "trapChecks": {"122": "Spot on magnitude! Remember exothermic reactions have a negative sign: Broken (1895) - Formed (2017) = -122 kJ/mol!", "3912": "TRAP! You added Broken + Formed! Formula is ALWAYS: Energy Change = Bonds Broken (Reactants) MINUS Bonds Formed (Products) = 1895 - 2017 = -122 kJ/mol!"}, "question": "Calculate the overall energy change (ΔH) for: CH₄ + Cl₂ ---> CH₃Cl + HCl. Bond energies (kJ/mol): C-H = 413, Cl-Cl = 243, C-Cl = 346, H-Cl = 432. (3 marks)", "promptSub": "NEVER SKIP BOND ENERGY TABLES! Formula: ΔH = Bonds Broken (Left) MINUS Bonds Formed (Right)!", "trueSeals": ["Step 1 (Bonds Broken on left): 4(C-H) + (Cl-Cl) = (4 × 413) + 243 = 1895 kJ/mol", "Step 2 (Bonds Formed on right): 3(C-H) + (C-Cl) + (H-Cl) = (3 × 413) + 346 + 432 = 2017 kJ/mol", "Step 3 (Broken MINUS Formed): ΔH = 1895 - 2017 = -122 kJ/mol"], "trapSeals": ["Leaving the 3-mark bond energy calculation completely blank (Stas's exam mistake!)", "Adding 1895 + 2017 instead of subtracting"], "manga": {"panel1Trap": "You left Q05.5 completely blank (0/3 marks)! Bond energy questions require zero memory - all the numbers are printed in the table right in front of you!", "panel2Sensei": "It is literally primary school addition and subtraction: 1) Add up all bonds on the LEFT (Reactants Broken): four C-H bonds (4 x 413 = 1652) + one Cl-Cl bond (243) = 1895. 2) Add up all bonds on the RIGHT (Products Formed): three C-H bonds (3 x 413 = 1239) + one C-Cl (346) + one H-Cl (432) = 2017. 3) Do LEFT MINUS RIGHT (Broken - Formed): 1895 - 2017 = -122 kJ/mol!", "panel3WhyAloud": "Why: Overall energy change is always the energy taken in to break reactant bonds minus the energy released forming product bonds.", "panel3MarkSchemeAloud": "Bonds broken equal one thousand eight hundred and ninety-five. Bonds formed equal two thousand and seventeen. Broken minus formed equals minus one hundred and twenty-two kilojoules per mole.", "voiceKeywords": ["bonds broken", "bonds formed", "minus", "one hundred and twenty-two"]}}, {"id": "CHEM-16", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q06.2, Q06.3, Q06.5", "topicTag": "Mass Changes with Gases & Stoichiometry", "category": "KEYWORDS", "marksLost": 5, "stasExamScore": "3 / 8", "question": "1) When heated in air, why does 0.24 g of Mg increase in mass to 0.40 g, whereas 0.84 g of MgCO₃ decreases in mass to 0.40 g (3m)? 2) 0.90 mol of Fe reacts with 1.20 mol of H₂O steam to form H₂ and an oxide of iron. What is the balanced equation (2m)?", "promptSub": "In Q06.5 you found the 3 : 4 mole ratio! Now finish the explanation and formula.", "trueSeals": ["Mg gains mass because it reacts/combines with OXYGEN (O₂) gas from the air to form solid MgO", "MgCO₃ loses mass because it thermally decomposes and CARBON DIOXIDE (CO₂) gas escapes into the air", "Both crucibles end at 0.40 g because both form 0.01 mol of the exact same solid product: MAGNESIUM OXIDE (MgO)", "Mole ratio 0.90 Fe : 1.20 H₂O = 3 : 4, giving the balanced equation:  3Fe + 4H₂O ---> Fe₃O₄ + 4H₂"], "trapSeals": ["Only quoting the mass numbers +0.16g and -0.44g from the graph without mentioning O₂ entering or CO₂ escaping (Stas's 2/4 answer)", "Finding the 3:4 ratio in Q06.5 but stopping before writing Fe₃O₄ (cost Stas 3 marks!)"], "manga": {"panel1Trap": "In Q06.2 you read the graph numbers (+0.16 g and -0.44 g) for 2/4 marks, but didn't explain WHY mass changed! And in Q06.5 you found the 3 : 4 mole ratio (1/4 marks), which was the hardest step, and then stopped before writing the formula Fe₃O₄!", "panel2Sensei": "Whenever mass changes in an open crucible, think GASES! 1) Magnesium (Mg) GAINS mass because it combines with OXYGEN (O₂) gas from the air. 2) Magnesium carbonate (MgCO₃) LOSES mass because CARBON DIOXIDE (CO₂) gas escapes! Both leave behind 0.01 mol (0.40 g) of solid MgO. 3) In Q06.5, since 3 moles of Fe react with 4 moles of H₂O, the oxide must contain 3 Fe atoms and 4 O atoms: Fe₃O₄ + 4H₂!", "panel3WhyAloud": "Why: Magnesium gains mass as oxygen gas joins from the air, while magnesium carbonate loses mass as carbon dioxide gas escapes.", "panel3MarkSchemeAloud": "Magnesium gains mass because it reacts with oxygen from the air, while magnesium carbonate loses mass because carbon dioxide gas escapes. Three Fe plus four H two O forms Fe three O four plus four H two.", "voiceKeywords": ["oxygen", "carbon dioxide", "escapes", "three", "four"]}}, {"id": "CHEM-17", "subject": "CHEM", "subjectTitle": "Chemistry 1H", "senseiName": "Itachi Uchiha (Master of Katon)", "qRef": "Q07.2 & Q07.4", "topicTag": "Ionic Formula Al₂(SO₄)₃ & Giant Covalent SiO₂", "category": "KEYWORDS", "marksLost": 5, "stasExamScore": "0 / 5", "question": "1) Give the formula of aluminium sulfate formed from Al³⁺ and SO₄²⁻ ions (1m). 2) Compare the structure and bonding in silicon dioxide (SiO₂) and poly(ethene) (4m).", "promptSub": "Mr. Hales wrote 'Bonding & Structure' on your cover! Select all 4 true structure & formula seals.", "trueSeals": ["Formula of aluminium sulfate is Al₂(SO₄)₃  [since 2 × (+3) = +6 balances 3 × (-2) = -6]", "Silicon dioxide (SiO₂) has a GIANT COVALENT STRUCTURE with strong covalent bonds between all atoms throughout the lattice", "Poly(ethene) consists of long POLYMER CHAINS with strong covalent bonds WITHIN the chains...", "...and WEAK INTERMOLECULAR FORCES between the polymer chains"], "trapSeals": ["Writing AlSO₄¹⁺ as the formula (Stas's exam mistake - ionic compounds must have ZERO overall charge!)", "Saying poly(ethene) has a giant covalent structure while SiO₂ is a polymer (Stas swapped them around on the exam - 0/4 marks!)"], "manga": {"panel1Trap": "In Q07.2 you wrote 'AlSO₄¹⁺' (0/1). An ionic compound is always neutral! And in Q07.4 you mixed up the two substances, writing that the polymer has a giant covalent lattice!", "panel2Sensei": "1) Balancing Al³⁺ and SO₄²⁻: swap the charge numbers diagonally (3 and 2) so total positive (+6) equals total negative (-6), and put brackets around the sulfate ion: Al₂(SO₄)₃! 2) Silicon dioxide (SiO₂, sand/quartz) is like diamond: a GIANT COVALENT STRUCTURE with strong covalent bonds throughout. Poly(ethene) is a POLYMER: strong covalent bonds inside each chain, with WEAK INTERMOLECULAR FORCES between the chains!", "panel3WhyAloud": "Why: Two plus-three aluminium ions balance three minus-two sulfate ions, and silicon dioxide is a giant covalent lattice unlike polymer chains.", "panel3MarkSchemeAloud": "The formula of aluminium sulfate is Al two SO four three. Silicon dioxide has a giant covalent structure with strong covalent bonds throughout, whereas polyethene has covalent bonds within polymer chains and weak intermolecular forces between chains.", "voiceKeywords": ["giant covalent structure", "strong covalent bonds", "polymer chains", "weak intermolecular forces"]}}];
 
 const HAND_SEAL_STAMPS = [
-  { kanji: "寅", name: "A" },
-  { kanji: "巳", name: "B" },
-  { kanji: "辰", name: "C" },
-  { kanji: "亥", name: "D" }
+  { kanji: "寅", name: "1" },
+  { kanji: "巳", name: "2" },
+  { kanji: "辰", name: "3" },
+  { kanji: "亥", name: "4" }
 ];
 
 // ============================================================================
@@ -1143,9 +1158,26 @@ function unlockFamilyGate() {
     localStorage.setItem(GATE_STORAGE_KEY, "1");
     document.getElementById("familyGate").style.display = "none";
     playRasenganWin();
+    autoFocusFirst("#screenDashboard");
   } else {
     document.getElementById("gateError").style.display = "block";
   }
+}
+
+function toggleQuickTvMode() {
+  const isNowTv = Date.now() >= (state.tvSofaOverrideUntil || 0);
+  state.tvSofaOverrideUntil = isNowTv ? (Date.now() + 2 * 60 * 60 * 1000) : 0;
+  saveState();
+  updateTvBtnUI();
+  if (ui.screen === "battle") renderBattleCard();
+}
+
+function updateTvBtnUI() {
+  const btn = document.getElementById("tvModeBtn");
+  if (!btn) return;
+  const active = Date.now() < (state.tvSofaOverrideUntil || 0);
+  btn.classList.toggle("tv-active", active);
+  btn.textContent = active ? "📺 TV ON" : "📺 TV";
 }
 
 // ============================================================================
@@ -1174,6 +1206,7 @@ function updateTimerUI() {
 
 function updateAllTelemetryUI() {
   updateTimerUI();
+  updateTvBtnUI();
   const wins = state.cleanWins || 0, traps = state.trapsHit || 0;
   const acc = (wins + traps) > 0 ? Math.round((wins / (wins + traps)) * 100) : 0;
   document.getElementById("statAccuracyPct").textContent = `${acc}%`;
@@ -1191,11 +1224,7 @@ function updateAllTelemetryUI() {
 }
 
 // ============================================================================
-// ULTRA-SIMPLE 2-STATE BATTLE ENGINE:
-//   view = "QUESTION" (Question + 1-Click Answers right on the same card!)
-//   view = "WIN"      (1-Click Next Boss!)
-//   view = "MISTAKE"  (Single Sensei + Mic Card on one screen!)
-//   view = "DONE"     (5-Boss Round Complete!)
+// BATTLE ENGINE
 // ============================================================================
 const ui = {
   screen: "dashboard",
@@ -1213,17 +1242,29 @@ const ui = {
   roundResults: {}
 };
 
+function autoFocusFirst(containerSelector) {
+  setTimeout(() => {
+    const root = document.querySelector(containerSelector) || document;
+    const first = root.querySelector(".tv-focusable:not([disabled])");
+    if (first) first.focus();
+  }, 60);
+}
+
 function showScreen(scr) {
   stopSpeechRecognition();
   ui.screen = scr;
-  document.getElementById("screenDashboard").style.display = scr === "dashboard" ? "block" : "none";
-  document.getElementById("screenBattle").style.display = scr === "battle" ? "block" : "none";
-  document.getElementById("screenDiagrams").style.display = scr === "diagrams" ? "block" : "none";
+  document.getElementById("screenDashboard").style.display = scr === "dashboard" ? "flex" : "none";
+  document.getElementById("screenBattle").style.display = scr === "battle" ? "flex" : "none";
+  document.getElementById("screenDiagrams").style.display = scr === "diagrams" ? "flex" : "none";
   if (scr === "battle") {
     if (ui.missionList.length === 0) startFiveBossSprint();
     else renderBattleCard();
+  } else if (scr === "diagrams") {
+    renderDiagramsGallery();
+    autoFocusFirst("#screenDiagrams");
+  } else {
+    autoFocusFirst("#screenDashboard");
   }
-  if (scr === "diagrams") renderDiagramsGallery();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -1299,22 +1340,22 @@ function renderBattleCard() {
 
   if (ui.view === "DONE") {
     mount.innerHTML = `
-      <div style="text-align:center; padding:16px;">
-        <div style="max-width:300px; height:170px; margin:0 auto 12px; border:4px solid #000; overflow:hidden;">
+      <div style="text-align:center; padding:24px; margin:auto;">
+        <div style="max-width:420px; height:240px; margin:0 auto 18px; border:5px solid #000; overflow:hidden;">
           <img src="${MANGA_ART.WIN}" style="width:100%; height:100%; object-fit:cover;">
         </div>
-        <h2 class="comic-font" style="font-size:2.2rem; color:var(--green); margin-bottom:8px;">🌀 5 BOSSES DEFEATED!</h2>
+        <h2 class="comic-font" style="font-size:clamp(2.2rem, 3.5vw, 4rem); color:var(--green); margin-bottom:16px;">🌀 5 BOSSES DEFEATED!</h2>
         <button class="btn-giant-start tv-focusable" onclick="startFiveBossSprint()">🔥 NEXT 5 BOSSES &rarr;</button>
         <button class="subj-btn tv-focusable" style="width:100%;" onclick="showScreen('dashboard')">🏠 Back to Home</button>
       </div>
     `;
+    autoFocusFirst("#battleCardMount");
     return;
   }
 
   const m = ui.missionList[ui.currentIndex];
   const senseiArt = getSenseiArt(m.subject);
 
-  // Simple 5-dot top bar
   const dotsHtml = ui.missionList.map((x, i) => {
     const res = ui.roundResults[i];
     const cls = i === ui.currentIndex ? "p-dot active" : (res === "WIN" ? "p-dot win" : (res === "TRAP" ? "p-dot trap" : "p-dot"));
@@ -1324,13 +1365,10 @@ function renderBattleCard() {
   const topBarHtml = `
     <div class="progress-dots-bar">
       <div class="dots-group">${dotsHtml}</div>
-      <div class="comic-font" style="font-size:1.15rem;">${m.subjectTitle} • +${m.marksLost} MARKS</div>
+      <div class="comic-font" style="font-size:clamp(1.2rem, 1.7vw, 2.2rem);">${m.subjectTitle} • +${m.marksLost} MARKS</div>
     </div>
   `;
 
-  // ==========================================================================
-  // VIEW 1: QUESTION + 1-CLICK ANSWERS ON THE SAME CARD (NO EXTRA CLICK!)
-  // ==========================================================================
   if (ui.view === "QUESTION") {
     let svgHtml = "";
     if (m.svgKey && BYAKUGAN_DIAGRAMS[m.svgKey]) {
@@ -1339,11 +1377,10 @@ function renderBattleCard() {
 
     let interactiveZoneHtml = "";
 
-    // If CALC and number not yet locked
     if (m.category === "CALC" && m.calcTarget && !ui.calcNumberLocked) {
       interactiveZoneHtml = `
-        <div style="background:#fef3c7; border:3.5px solid #000; padding:12px; text-align:center;">
-          <div class="comic-font" style="font-size:1.3rem;">🧮 ENTER NUMBER & TAP UNIT:</div>
+        <div style="background:#fef3c7; border:4px solid #000; padding:18px; text-align:center; flex:1; display:flex; flex-direction:column; justify-content:center;">
+          <div class="comic-font" style="font-size:clamp(1.4rem, 2vw, 2.4rem);">🧮 ENTER NUMBER & TAP UNIT:</div>
           <input type="text" id="calcFieldInput" class="calc-display tv-focusable" value="${ui.calcInputVal}" placeholder="0.00"
                  oninput="ui.calcInputVal = this.value">
           <div class="numpad-grid">
@@ -1351,36 +1388,34 @@ function renderBattleCard() {
               `<button class="num-key tv-focusable" onclick="pressNumpad('${k}')">${k}</button>`
             ).join("")}
           </div>
-          <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:8px;">
+          <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:12px;">
             ${(m.unitChoices || [m.calcUnit]).map(u =>
-              `<button class="subj-btn tv-focusable" style="background:var(--cyan); font-size:1.25rem; padding:10px 18px;" onclick="submitCalcAndUnit('${u.replace(/'/g, "\\'")}')">✓ ${u}</button>`
+              `<button class="subj-btn tv-focusable" style="background:var(--cyan); font-size:clamp(1.3rem, 1.8vw, 2.2rem); padding:12px 26px;" onclick="submitCalcAndUnit('${u.replace(/'/g, "\\'")}')">✓ ${u}</button>`
             ).join("")}
           </div>
         </div>
       `;
     } else if (ui.comboPairs.length > 0) {
-      // 50/50 COMBO DUEL (2 cards only!)
       const pair = ui.comboPairs[ui.comboStepIndex];
       interactiveZoneHtml = `
-        <div style="background:#000; color:var(--yellow); padding:6px 12px; font-family:'Bangers',Impact,sans-serif; font-size:1.15rem; margin-bottom:8px;">
+        <div style="background:#000; color:var(--yellow); padding:10px 16px; font-family:'Bangers',Impact,sans-serif; font-size:clamp(1.25rem, 1.7vw, 2.2rem); margin-bottom:12px;">
           ⚡ COMBO STEP ${ui.comboStepIndex + 1} OF ${ui.comboPairs.length}: TAP THE TRUE MARK SCHEME POINT!
         </div>
         <div class="answers-list">
           ${pair.map((s, idx) => `
             <button class="ans-card tv-focusable" onclick="clickComboCard(${idx})">
-              <div class="ans-badge">${idx === 0 ? 'A' : 'B'}</div>
+              <div class="ans-badge">${idx + 1}</div>
               <div class="ans-text">${s.text}</div>
             </button>
           `).join("")}
         </div>
       `;
     } else {
-      // Standard 1-Click Answer Cards
       interactiveZoneHtml = `
         <div class="answers-list">
           ${ui.shuffledSeals.map((s, idx) => `
             <button class="ans-card tv-focusable" onclick="clickSingleCard(${idx})">
-              <div class="ans-badge">${HAND_SEAL_STAMPS[idx % 4].name}</div>
+              <div class="ans-badge">${idx + 1}</div>
               <div class="ans-text">${s.text}</div>
             </button>
           `).join("")}
@@ -1402,36 +1437,33 @@ function renderBattleCard() {
       ${svgHtml}
       ${interactiveZoneHtml}
     `;
+    autoFocusFirst(".answers-list, .numpad-grid");
     return;
   }
 
-  // ==========================================================================
-  // VIEW 2: CLEAN WIN CARD (1 CLICK TO NEXT BOSS!)
-  // ==========================================================================
   if (ui.view === "WIN") {
     mount.innerHTML = `
       ${topBarHtml}
-      <div style="text-align:center; padding:12px;">
-        <div style="max-width:280px; height:160px; margin:0 auto 12px; border:4px solid #000; overflow:hidden; position:relative;">
+      <div style="text-align:center; padding:20px; margin:auto; width:100%;">
+        <div style="max-width:440px; height:250px; margin:0 auto 18px; border:5px solid #000; overflow:hidden; position:relative;">
           <img src="${MANGA_ART.WIN}" style="width:100%; height:100%; object-fit:cover;">
-          <div class="sfx-float" style="font-size:1.6rem;">螺旋丸!!</div>
+          <div class="sfx-float">螺旋丸!!</div>
         </div>
-        <h2 class="comic-font" style="font-size:2.1rem; color:var(--green); margin-bottom:12px;">
+        <h2 class="comic-font" style="font-size:clamp(2.2rem, 3.4vw, 4.2rem); color:var(--green); margin-bottom:18px;">
           🌀 DIRECT HIT! +${m.marksLost} MARKS!
         </h2>
         <button class="btn-giant-start tv-focusable" style="margin:0;" onclick="nextMission()">
-          NEXT BOSS &rarr;
+          NEXT BOSS (PRESS OK / ENTER) &rarr;
         </button>
       </div>
     `;
+    autoFocusFirst("#battleCardMount");
     return;
   }
 
-  // ==========================================================================
-  // VIEW 3: SINGLE SENSEI + MIC CARD (ALL ON 1 COMPACT SCREEN!)
-  // ==========================================================================
   if (ui.view === "MISTAKE") {
-    const isTvCoop = Date.now() < (state.tvSofaOverrideUntil || 0);
+    const hasSpeechApi = !!("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
+    const isTvCoop = !hasSpeechApi || Date.now() < (state.tvSofaOverrideUntil || 0);
     const kwBadges = (m.manga.voiceKeywords || []).map((kw, kIdx) => {
       const spoken = !!ui.spokenKeywords[kIdx];
       return `<span class="kw-chip ${spoken ? 'spoken' : ''}" id="kwChip_${kIdx}">${spoken ? '✓ ' : '🎤 '}${kw}</span>`;
@@ -1443,7 +1475,7 @@ function renderBattleCard() {
         <div class="sensei-top-row">
           <div class="sensei-art-cell">
             <img src="${senseiArt}" alt="${m.senseiName}">
-            <div class="sfx-float" style="font-size:1.4rem;">幻術!!</div>
+            <div class="sfx-float">幻術!!</div>
           </div>
           <div class="sensei-lessons-cell">
             <div class="trap-note"><b>❌ Exam Trap:</b> ${m.manga.panel1Trap}</div>
@@ -1452,37 +1484,41 @@ function renderBattleCard() {
         </div>
 
         <div class="voice-box">
-          <div style="font-size:0.78rem; color:var(--yellow); font-weight:900; text-transform:uppercase;">
+          <div style="font-size:clamp(0.85rem, 1.1vw, 1.4rem); color:var(--yellow); font-weight:900; text-transform:uppercase;">
             🗣️ READ THIS ALOUD IN ENGLISH TO UNLOCK NEXT BOSS:
           </div>
           <div class="voice-target-sentence">"${m.manga.panel3MarkSchemeAloud}"</div>
           <div>${kwBadges}</div>
 
-          <div id="liveSpeechTranscript" style="font-size:0.85rem; color:#86efac; font-weight:800; margin-top:6px; min-height:20px;"></div>
+          <div id="liveSpeechTranscript" style="font-size:1rem; color:#86efac; font-weight:800; margin-top:6px; min-height:22px;"></div>
 
           <div class="mic-btn-row">
             <button class="btn-mic tv-focusable" id="micSpeakBtn" onclick="toggleSpeechRecognition()">
-              🎤 TAP & SPEAK ALOUD
+              🎤 TAP & SPEAK ALOUD (MIC)
             </button>
             <button class="icon-btn tv-focusable" style="background:var(--cyan);" onclick="speakSenseiTts()">
               🔊 LISTEN
+            </button>
+            <button class="icon-btn tv-focusable" style="background:var(--green); color:#fff;" onclick="completeMangaReadAloud(true)">
+              📺 READ ALOUD ON TV &rarr; NEXT
             </button>
           </div>
 
           ${isTvCoop ? `
             <button class="btn-next-after-mic unlocked tv-focusable" onclick="completeMangaReadAloud(true)">
-              ✅ NEXT BOSS (TV MODE) &rarr;
+              ✅ READ ALOUD DONE (TV MODE) &rarr; NEXT BOSS
             </button>
           ` : `
             <button class="btn-next-after-mic ${ui.mangaUnlocked ? 'unlocked' : 'locked'} tv-focusable"
                     id="btnUnlockNextMission"
                     onclick="completeMangaReadAloud(false)">
-              ${ui.mangaUnlocked ? '🔓 UNLOCKED! NEXT BOSS &rarr;' : '🔒 SPEAK INTO MIC TO UNLOCK'}
+              ${ui.mangaUnlocked ? '🔓 UNLOCKED! NEXT BOSS &rarr;' : '🔒 SPEAK INTO MIC OR TAP [📺 READ ALOUD ON TV]'}
             </button>
           `}
         </div>
       </div>
     `;
+    autoFocusFirst(".mic-btn-row");
     return;
   }
 }
@@ -1649,7 +1685,7 @@ function toggleSpeechRecognition() {
   recognition.onend = () => {
     isListening = false;
     const btn = document.getElementById("micSpeakBtn");
-    if (btn) { btn.classList.remove("listening"); btn.textContent = "🎤 TAP & SPEAK ALOUD"; }
+    if (btn) { btn.classList.remove("listening"); btn.textContent = "🎤 TAP & SPEAK ALOUD (MIC)"; }
   };
   try { recognition.start(); } catch (e) {}
 }
@@ -1689,6 +1725,47 @@ function nextMission() {
 }
 
 // ============================================================================
+// SMART TV REMOTE D-PAD + KEYBOARD NAVIGATION (ARROWS, OK/ENTER, 1-4)
+// ============================================================================
+document.addEventListener("keydown", (e) => {
+  if (document.activeElement && document.activeElement.tagName === "INPUT") {
+    if (e.key === "Escape") document.activeElement.blur();
+    return;
+  }
+
+  // Direct number keys 1-4 for answer cards
+  if (ui.screen === "battle" && ui.view === "QUESTION" && ["1","2","3","4"].includes(e.key)) {
+    const idx = parseInt(e.key, 10) - 1;
+    e.preventDefault();
+    if (ui.comboPairs.length > 0 && (idx === 0 || idx === 1)) {
+      clickComboCard(idx);
+    } else if (ui.shuffledSeals[idx]) {
+      clickSingleCard(idx);
+    }
+    return;
+  }
+
+  // D-Pad Arrow navigation across all visible .tv-focusable elements
+  if (["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft"].includes(e.key)) {
+    const allFocusable = Array.from(document.querySelectorAll(".tv-focusable")).filter(el => {
+      return el.offsetParent !== null && !el.disabled;
+    });
+    if (allFocusable.length === 0) return;
+    e.preventDefault();
+    const curIdx = allFocusable.indexOf(document.activeElement);
+    let nextIdx = 0;
+    if (curIdx === -1) {
+      nextIdx = 0;
+    } else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      nextIdx = (curIdx + 1) % allFocusable.length;
+    } else {
+      nextIdx = (curIdx - 1 + allFocusable.length) % allFocusable.length;
+    }
+    allFocusable[nextIdx].focus();
+  }
+});
+
+// ============================================================================
 // DIAGRAMS, QR & ADMIN
 // ============================================================================
 function renderDiagramsGallery() {
@@ -1697,9 +1774,9 @@ function renderDiagramsGallery() {
     const boxId = "galDiag_" + key;
     return `
       <div class="svg-container" id="${boxId}">
-        <div class="comic-font" style="color:var(--cyan); font-size:1.25rem; margin-bottom:6px;">${d.title}</div>
+        <div class="comic-font" style="color:var(--cyan); font-size:clamp(1.3rem, 1.8vw, 2.2rem); margin-bottom:6px;">${d.title}</div>
         ${d.svg}
-        <button class="home-pill" style="margin:8px auto 0;" onclick="document.getElementById('${boxId}').classList.toggle('byakugan-hidden')">
+        <button class="home-pill tv-focusable" style="margin:10px auto 0;" onclick="document.getElementById('${boxId}').classList.toggle('byakugan-hidden')">
           👁️ Show / Hide Labels
         </button>
       </div>
@@ -1754,7 +1831,7 @@ function verifyAdminPin() {
 }
 
 function enableTvCoopMode() {
-  state.tvSofaOverrideUntil = Date.now() + 30 * 60 * 1000;
+  state.tvSofaOverrideUntil = Date.now() + 60 * 60 * 1000;
   saveState(); closeModals();
   if (ui.screen === "battle") renderBattleCard();
 }
@@ -1784,6 +1861,7 @@ document.getElementById("heroBannerImg").src = MANGA_ART.HERO_VS;
 loadState();
 checkFamilyGateOnLoad();
 updateAllTelemetryUI();
+autoFocusFirst("#screenDashboard");
 </script>
 </body>
 </html>
