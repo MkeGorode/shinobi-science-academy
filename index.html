@@ -460,6 +460,31 @@
   }
 
   /* Cohesive Interactive Zone (Combo Header + Answer Cards stay glued together!) */
+  .battle-body-area {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 1.2vh, 14px);
+    width: 100%;
+  }
+
+  @media (min-width: 760px) {
+    body:not(.phone-remote-mode) .battle-body-area.with-svg-split {
+      display: grid;
+      grid-template-columns: 1.06fr 0.94fr;
+      gap: clamp(10px, 1.3vw, 20px);
+      align-items: stretch;
+    }
+    body:not(.phone-remote-mode) .battle-body-area.with-svg-split .answers-list {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    body:not(.phone-remote-mode) .battle-body-area.with-svg-split .svg-container {
+      height: 100%;
+      margin: 0;
+    }
+  }
+
   .interactive-zone {
     flex: 1;
     display: flex;
@@ -1010,11 +1035,45 @@
     .svg-header-bar { padding-bottom: 3px !important; }
     .svg-container svg { max-height: 26vh !important; }
     .svg-container.gallery-mode svg { max-height: 52vh !important; }
+    body:not(.phone-remote-mode) .battle-body-area.with-svg-split {
+      display: grid !important;
+      grid-template-columns: 1.06fr 0.94fr !important;
+      gap: 8px !important;
+      flex: 1 1 0 !important;
+      min-height: 0 !important;
+      align-items: stretch !important;
+    }
+    body:not(.phone-remote-mode) .battle-body-area.with-svg-split .svg-container {
+      height: 100% !important;
+      max-height: 100% !important;
+      justify-content: space-between !important;
+    }
+    body:not(.phone-remote-mode) .battle-body-area.with-svg-split .svg-container svg {
+      max-height: 44vh !important;
+      width: 100% !important;
+    }
+    body:not(.phone-remote-mode) .battle-body-area.with-svg-split .answers-list {
+      grid-template-columns: minmax(0, 1fr) !important;
+      gap: 5px !important;
+    }
+    body:not(.phone-remote-mode) .battle-body-area.with-svg-split .ans-card {
+      min-height: 38px !important;
+      padding: 4px 8px !important;
+    }
+    body:not(.phone-remote-mode) .battle-body-area.with-svg-split .ans-text {
+      font-size: 0.82rem !important;
+      line-height: 1.15 !important;
+    }
     .combo-header-strip { padding: 4px 10px !important; font-size: 0.9rem !important; }
     .answers-list { gap: 6px !important; }
     .ans-card { min-height: 46px !important; padding: 6px 10px !important; gap: 8px !important; border-width: 2.5px !important; box-shadow: 3px 3px 0 #000 !important; }
     .ans-badge { min-width: 32px !important; height: 32px !important; font-size: 1.1rem !important; }
     .ans-text { font-size: 0.86rem !important; line-height: 1.18 !important; }
+    .calc-zone-card { padding: 6px 10px !important; gap: 5px !important; border-width: 2.5px !important; box-shadow: 3px 3px 0 #000 !important; }
+    .calc-display { font-size: 1.35rem !important; padding: 3px 10px !important; border-width: 2.5px !important; }
+    .numpad-grid { gap: 5px !important; }
+    .num-key { padding: 4px 12px !important; font-size: 1.05rem !important; border-width: 2px !important; }
+    .win-art-box { height: 170px !important; margin-bottom: 10px !important; border-width: 3px !important; }
     .sensei-top-row { grid-template-columns: 95px minmax(0, 1fr) !important; border-bottom-width: 2.5px !important; }
     .sensei-art-cell { min-height: 75px !important; max-height: 22vh !important; }
     .sensei-lessons-cell { padding: 5px 8px !important; gap: 4px !important; }
@@ -2319,12 +2378,12 @@ function renderBattleCard() {
 
   if (ui.view === "DONE") {
     mount.innerHTML = `
-      <div style="text-align:center; padding:24px; margin:auto;">
-        <div style="max-width:440px; height:240px; margin:0 auto 18px; border:5px solid #000; overflow:hidden;">
+      <div style="text-align:center; padding:12px; margin:auto;">
+        <div class="win-art-box" style="max-width:440px; height:240px; margin:0 auto 18px; border:5px solid #000; overflow:hidden;">
           <img src="${MANGA_ART.WIN}" style="width:100%; height:100%; object-fit:cover;">
         </div>
-        <h2 class="comic-font" style="font-size:clamp(2.2rem, 3.5vw, 4rem); color:var(--green); margin-bottom:16px;">🌀 5 BOSSES DEFEATED!</h2>
-        <button class="btn-giant-start tv-focusable" style="margin-bottom:12px;" onclick="startFiveBossSprint()">🔥 NEXT 5 BOSSES ➜</button>
+        <h2 class="comic-font" style="font-size:clamp(2.2rem, 3.5vw, 4rem); color:var(--green); margin-bottom:12px;">🌀 5 BOSSES DEFEATED!</h2>
+        <button class="btn-giant-start tv-focusable" style="margin-bottom:10px;" onclick="startFiveBossSprint()">🔥 NEXT 5 BOSSES ➜</button>
         <button class="subj-btn tv-focusable" style="width:100%;" onclick="showScreen('dashboard')">🏠 Back to Home</button>
       </div>
     `;
@@ -2351,13 +2410,16 @@ function renderBattleCard() {
   `;
 
   if (ui.view === "QUESTION") {
+    let remoteHintHtml = "";
     let svgHtml = "";
     if (hasSvg) {
       const diag = BYAKUGAN_DIAGRAMS[m.svgKey];
-      svgHtml = `
+      remoteHintHtml = `
         <button class="remote-pad-hint tv-focusable" style="width:100%; cursor:pointer; background:#0f172a; color:var(--yellow);" onclick="toggleBattleXray()">
           👁️ ${ui.xrayRevealed ? 'Сховати X-Ray підказки на ТВ' : 'Показати X-Ray підказки на ТВ'}
         </button>
+      `;
+      svgHtml = `
         <div class="svg-container ${ui.xrayRevealed ? '' : 'byakugan-hidden'}" id="battleSvgBox">
           <div class="svg-header-bar">
             <span class="comic-font" style="color:var(--cyan); font-size:clamp(1rem, 1.3vw, 1.6rem);">${diag.title}</span>
@@ -2375,7 +2437,7 @@ function renderBattleCard() {
     if (m.category === "CALC" && m.calcTarget && !ui.calcNumberLocked) {
       interactiveZoneHtml = `
         <div class="calc-zone-card">
-          <div class="comic-font" style="font-size:clamp(1.3rem, 1.8vw, 2.3rem);">🧮 STEP 1: TYPE NUMBER &amp; TAP CORRECT UNIT:</div>
+          <div class="comic-font" style="font-size:clamp(1.2rem, 1.7vw, 2.2rem);">🧮 STEP 1: TYPE NUMBER &amp; TAP CORRECT UNIT:</div>
           <input type="text" id="calcFieldInput" class="calc-display tv-focusable" value="${ui.calcInputVal}" placeholder="0.00"
                  oninput="ui.calcInputVal = this.value">
           <div class="numpad-grid">
@@ -2383,9 +2445,9 @@ function renderBattleCard() {
               `<button class="num-key tv-focusable" onclick="pressNumpad('${k}')">${k}</button>`
             ).join("")}
           </div>
-          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:4px;">
+          <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:2px;">
             ${(m.unitChoices || [m.calcUnit]).map(u =>
-              `<button class="subj-btn tv-focusable" style="background:var(--cyan); font-size:clamp(1.2rem, 1.65vw, 2.1rem); padding:10px 22px;" onclick="submitCalcAndUnit('${u.replace(/'/g, "\\'")}')">✓ ${u}</button>`
+              `<button class="subj-btn tv-focusable" style="background:var(--cyan); font-size:clamp(1.05rem, 1.5vw, 2rem); padding:6px 18px;" onclick="submitCalcAndUnit('${u.replace(/'/g, "\\'")}')">✓ ${u}</button>`
             ).join("")}
           </div>
         </div>
@@ -2439,8 +2501,11 @@ function renderBattleCard() {
           <div class="q-main-text">${m.question}</div>
         </div>
       </div>
-      ${svgHtml}
-      ${interactiveZoneHtml}
+      ${remoteHintHtml}
+      <div class="battle-body-area ${hasSvg ? 'with-svg-split' : ''}">
+        ${svgHtml}
+        ${interactiveZoneHtml}
+      </div>
     `;
     autoFocusFirst(".answers-list, .numpad-grid");
     broadcastHostSnapshot();
@@ -2450,12 +2515,12 @@ function renderBattleCard() {
   if (ui.view === "WIN") {
     mount.innerHTML = `
       ${topBarHtml}
-      <div style="text-align:center; padding:20px; margin:auto; width:100%;">
-        <div style="max-width:440px; height:250px; margin:0 auto 18px; border:5px solid #000; overflow:hidden; position:relative;">
+      <div style="text-align:center; padding:10px; margin:auto; width:100%;">
+        <div class="win-art-box" style="max-width:440px; height:250px; margin:0 auto 18px; border:5px solid #000; overflow:hidden; position:relative;">
           <img src="${MANGA_ART.WIN}" style="width:100%; height:100%; object-fit:cover;">
           <div class="sfx-float">螺旋丸!!</div>
         </div>
-        <h2 class="comic-font" style="font-size:clamp(2.2rem, 3.4vw, 4.2rem); color:var(--green); margin-bottom:18px;">
+        <h2 class="comic-font" style="font-size:clamp(2.2rem, 3.4vw, 4.2rem); color:var(--green); margin-bottom:12px;">
           🌀 DIRECT HIT! +${m.marksLost} MARKS!
         </h2>
         <button class="btn-giant-start tv-focusable" style="margin:0;" onclick="nextMission()">
