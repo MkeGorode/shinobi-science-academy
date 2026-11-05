@@ -18,10 +18,9 @@ jobs:
         run: |
           BUILD_TOOLS=$(ls -d $ANDROID_HOME/build-tools/* | tail -n 1)
           PLATFORM=$(ls -d $ANDROID_HOME/platforms/* | tail -n 1)
-          echo "Using $BUILD_TOOLS and $PLATFORM"
           mkdir -p build/gen build/obj build/apk
           $BUILD_TOOLS/aapt package -f -m -J build/gen -S tv-app/res -M tv-app/AndroidManifest.xml -I $PLATFORM/android.jar
-          javac --release 8 -classpath $PLATFORM/android.jar -d build/obj build/gen/com/vyriy/shinobi8464/R.java tv-app/src/com/vyriy/shinobi8464/MainActivity.java
+          javac --release 8 -classpath $PLATFORM/android.jar -d build/obj build/gen/com/vyriy/shinobi8464/R.java tv-app/src/com/vyriy/shinobi8464/*.java
           $BUILD_TOOLS/d8 --lib $PLATFORM/android.jar --output build/apk build/obj/com/vyriy/shinobi8464/*.class
           $BUILD_TOOLS/aapt package -f -M tv-app/AndroidManifest.xml -S tv-app/res -I $PLATFORM/android.jar -F build/unsigned.apk build/apk
           $BUILD_TOOLS/zipalign -f -p 4 build/unsigned.apk build/aligned.apk
@@ -30,5 +29,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add Shinobi_Science_8464.apk
-          git commit -m "Publish compiled Shinobi_Science_8464.apk" || true
+          git commit -m "Publish compiled Shinobi_Science_8464.apk v2 (Live TV button)" || true
           git push
