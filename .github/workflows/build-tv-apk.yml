@@ -1,0 +1,34 @@
+name: Build TV APK
+on:
+  push:
+    paths:
+      - 'tv-app/**'
+      - '.github/workflows/build-tv-apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile Android TV APK
+        run: |
+          BUILD_TOOLS=$(ls -d $ANDROID_HOME/build-tools/* | tail -n 1)
+          PLATFORM=$(ls -d $ANDROID_HOME/platforms/* | tail -n 1)
+          echo "Using $BUILD_TOOLS and $PLATFORM"
+          mkdir -p build/gen build/obj build/apk
+          $BUILD_TOOLS/aapt package -f -m -J build/gen -S tv-app/res -M tv-app/AndroidManifest.xml -I $PLATFORM/android.jar
+          javac --release 8 -classpath $PLATFORM/android.jar -d build/obj build/gen/com/vyriy/shinobi8464/R.java tv-app/src/com/vyriy/shinobi8464/MainActivity.java
+          $BUILD_TOOLS/d8 --lib $PLATFORM/android.jar --output build/apk build/obj/com/vyriy/shinobi8464/*.class
+          $BUILD_TOOLS/aapt package -f -M tv-app/AndroidManifest.xml -S tv-app/res -I $PLATFORM/android.jar -F build/unsigned.apk build/apk
+          $BUILD_TOOLS/zipalign -f -p 4 build/unsigned.apk build/aligned.apk
+          keytool -genkeypair -v -keystore build/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Shinobi,O=Vyriy,C=GB"
+          $BUILD_TOOLS/apksigner sign --ks build/debug.keystore --ks-pass pass:android --key-pass pass:android --out Shinobi_Science_8464.apk build/aligned.apk
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add Shinobi_Science_8464.apk
+          git commit -m "Publish compiled Shinobi_Science_8464.apk" || true
+          git push
