@@ -1850,7 +1850,6 @@ function initSyncBridge(forceRole, forceRoom) {
     sync.room = forceRoom || saved;
     if (params.get("tv") === "1") {
       document.body.classList.add("tv-mode");
-      setTimeout(() => { if (!sync.peerConnected) openQrModal(); }, 350);
     }
   }
 
