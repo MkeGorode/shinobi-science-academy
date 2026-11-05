@@ -1152,39 +1152,42 @@
   </section>
 </main>
 
-<!-- TV + PHONE LIVE PAIRING MODAL -->
+<!-- TV + PHONE LIVE PAIRING MODAL (COMPACT 2-COLUMN FOR 960x540 TV & MOBILE) -->
 <div class="modal-bg" id="qrModal">
-  <div class="modal-card" style="text-align:center;">
-    <h2 class="comic-font" style="font-size:2rem; margin-bottom:4px;">📺 TV SCREEN + 📱 PHONE CONTROLLER</h2>
-    <p style="font-size:0.95rem; font-weight:800; color:#334155; margin-bottom:10px;">
-      Scan with Stas's Phone to use the Phone as the <b>Touch Controller &amp; Voice Microphone</b> for this TV!
-    </p>
-    <div id="pairStatusBadge" style="background:#fef3c7; border:3px solid #000; padding:6px 12px; font-weight:900; margin-bottom:10px;">
-      🟡 Waiting for Phone to scan QR...
-    </div>
-    <div id="modalQrBox" style="background:#fff; padding:12px; border:4px solid #000; width:220px; height:220px; margin:0 auto 10px;"></div>
-    <div class="comic-font" style="font-size:1.7rem; margin-bottom:10px;">
-      TV ROOM CODE: <span id="modalRoomCodeText" style="color:var(--red); background:#fff; padding:2px 10px; border:3px solid #000;">----</span>
+  <div class="modal-card" style="max-width:660px; padding:14px 18px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; border-bottom:3px solid #000; padding-bottom:8px; margin-bottom:10px;">
+      <h2 class="comic-font" style="font-size:1.55rem; margin:0;">📺 TV SCREEN + 📱 PHONE CONTROLLER</h2>
+      <button class="home-pill tv-focusable" id="qrModalCloseBtn" style="padding:5px 14px; font-size:1.05rem; background:var(--red); color:#fff;" onclick="closeModals()">✕ Close</button>
     </div>
 
-    <div style="background:#fff; border:3px solid #000; padding:10px; margin-bottom:12px;">
-      <div style="font-size:0.85rem; font-weight:800; margin-bottom:6px;">Already on Phone? Enter the 4-digit TV Room Code:</div>
-      <div style="display:flex; gap:6px; justify-content:center;">
-        <input type="text" id="manualRoomInput" maxlength="6" style="width:110px; padding:8px; border:3px solid #000; font-family:'Bangers',sans-serif; font-size:1.4rem; text-align:center;" placeholder="4821">
-        <button class="home-pill tv-focusable" onclick="connectAsControllerManual()">🎮 Connect Phone to TV</button>
+    <div style="display:grid; grid-template-columns:156px minmax(0, 1fr); gap:14px; align-items:center;">
+      <div id="modalQrBox" style="background:#fff; padding:8px; border:3.5px solid #000; width:156px; height:156px; margin:0 auto;"></div>
+
+      <div style="display:flex; flex-direction:column; gap:8px; text-align:left;">
+        <div id="pairStatusBadge" style="background:#fef3c7; border:2.5px solid #000; padding:5px 10px; font-weight:900; font-size:0.85rem;">
+          🟡 Scan QR with Stas's Phone (auto-connects to Room #8464)
+        </div>
+
+        <div class="comic-font" style="font-size:1.45rem;">
+          TV ROOM CODE: <span id="modalRoomCodeText" style="color:var(--red); background:#fff; padding:2px 10px; border:2.5px solid #000;">8464</span>
+        </div>
+
+        <div style="background:#fff; border:2.5px solid #000; padding:6px 10px; display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+          <span style="font-size:0.78rem; font-weight:800;">Manual Room Code:</span>
+          <input type="text" id="manualRoomInput" maxlength="6" style="width:76px; padding:4px; border:2.5px solid #000; font-family:'Bangers',sans-serif; font-size:1.15rem; text-align:center;" placeholder="8464">
+          <button class="home-pill tv-focusable" style="padding:4px 10px; font-size:0.95rem;" onclick="connectAsControllerManual()">🎮 Connect</button>
+        </div>
+
+        <details style="text-align:left;">
+          <summary style="font-weight:800; cursor:pointer; font-size:0.76rem;">Backup: Manual Progress Copy/Load</summary>
+          <div style="display:flex; gap:4px; margin-top:4px;">
+            <input type="text" id="syncTokenInput" style="flex:1; padding:4px; border:2px solid #000; font-family:monospace; font-size:0.75rem;" placeholder="Sync Code...">
+            <button class="icon-btn tv-focusable" style="padding:3px 8px; font-size:0.8rem;" onclick="copySyncToken()">Copy</button>
+            <button class="icon-btn tv-focusable" style="padding:3px 8px; font-size:0.8rem;" onclick="importSyncToken()">Load</button>
+          </div>
+        </details>
       </div>
     </div>
-
-    <details style="margin-bottom:12px; text-align:left;">
-      <summary style="font-weight:800; cursor:pointer; font-size:0.85rem;">Backup: Manual Progress Copy/Load</summary>
-      <div style="display:flex; gap:6px; margin-top:6px;">
-        <input type="text" id="syncTokenInput" style="flex:1; padding:8px; border:2.5px solid #000; font-family:monospace;" placeholder="Sync Code...">
-        <button class="icon-btn tv-focusable" onclick="copySyncToken()">Copy</button>
-        <button class="icon-btn tv-focusable" onclick="importSyncToken()">Load</button>
-      </div>
-    </details>
-
-    <button class="home-pill tv-focusable" style="width:100%; justify-content:center;" onclick="closeModals()">Close</button>
   </div>
 </div>
 
@@ -2776,12 +2779,23 @@ function nextMission() {
 // SMART TV REMOTE D-PAD + KEYBOARD NAVIGATION (ARROWS, OK/ENTER, 1-4)
 // ============================================================================
 document.addEventListener("keydown", (e) => {
+  const qrOpen = document.getElementById("qrModal").style.display === "flex";
+  const adminOpen = document.getElementById("adminModal").style.display === "flex";
+
+  if (e.key === "Escape" || e.key === "GoBack" || (e.key === "Backspace" && (!document.activeElement || document.activeElement.tagName !== "INPUT"))) {
+    if (qrOpen || adminOpen) {
+      e.preventDefault();
+      closeModals();
+      return;
+    }
+  }
+
   if (document.activeElement && document.activeElement.tagName === "INPUT") {
     if (e.key === "Escape") document.activeElement.blur();
     return;
   }
 
-  if (ui.screen === "battle" && ui.view === "QUESTION" && ["1","2","3","4"].includes(e.key)) {
+  if (!qrOpen && !adminOpen && ui.screen === "battle" && ui.view === "QUESTION" && ["1","2","3","4"].includes(e.key)) {
     const idx = parseInt(e.key, 10) - 1;
     e.preventDefault();
     if (ui.comboPairs.length > 0 && (idx === 0 || idx === 1)) {
@@ -2793,7 +2807,10 @@ document.addEventListener("keydown", (e) => {
   }
 
   if (["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft"].includes(e.key)) {
-    const allFocusable = Array.from(document.querySelectorAll(".tv-focusable")).filter(el => {
+    const scopeRoot = qrOpen
+      ? document.getElementById("qrModal")
+      : (adminOpen ? document.getElementById("adminModal") : document);
+    const allFocusable = Array.from(scopeRoot.querySelectorAll(".tv-focusable")).filter(el => {
       return el.offsetParent !== null && !el.disabled;
     });
     if (allFocusable.length === 0) return;
@@ -2807,7 +2824,7 @@ document.addEventListener("keydown", (e) => {
     } else {
       nextIdx = (curIdx - 1 + allFocusable.length) % allFocusable.length;
     }
-    allFocusable[nextIdx].focus();
+    allFocusable[nextIdx].focus({ preventScroll: true });
   }
 });
 
@@ -2884,12 +2901,13 @@ function getControllerPairUrl() {
 
 function openQrModal() {
   const url = getControllerPairUrl();
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
-  document.getElementById("modalQrBox").innerHTML = `<img src="${qrUrl}" style="width:100%;height:100%;">`;
-  document.getElementById("modalRoomCodeText").textContent = sync.room || "----";
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(url)}`;
+  document.getElementById("modalQrBox").innerHTML = `<img src="${qrUrl}" style="width:100%;height:100%;display:block;">`;
+  document.getElementById("modalRoomCodeText").textContent = sync.room || "8464";
   document.getElementById("syncTokenInput").value = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
   updateTvBtnUI();
   document.getElementById("qrModal").style.display = "flex";
+  autoFocusFirst("#qrModal");
 }
 
 function copySyncToken() {
@@ -2913,6 +2931,7 @@ function openAdminModal() {
   document.getElementById("adminPinView").style.display = "block";
   document.getElementById("adminStudioView").style.display = "none";
   document.getElementById("adminModal").style.display = "flex";
+  autoFocusFirst("#adminModal");
 }
 
 function verifyAdminPin() {
@@ -2945,6 +2964,9 @@ function saveCloudEndpoint() {
 function closeModals() {
   document.getElementById("qrModal").style.display = "none";
   document.getElementById("adminModal").style.display = "none";
+  if (ui.screen === "battle") autoFocusFirst("#battleCardMount");
+  else if (ui.screen === "diagrams") autoFocusFirst("#diagramsGalleryMount");
+  else autoFocusFirst("#screenDashboard");
 }
 
 window.addEventListener("DOMContentLoaded", () => {
